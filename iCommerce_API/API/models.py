@@ -30,4 +30,4 @@ class PurchaseHistory(models.Model):
     products = models.ManyToManyField('Product')
 
     def __str__(self):
-        return str(self.idUser) + ' - ' + str(self.totalPrice) + ' - ' + str(self.date)
+        return str(self.id) + '; User: ' + str(self.idUser) + '; Total price: ' + str(self.totalPrice) + '; Date: ' + str(self.date)
