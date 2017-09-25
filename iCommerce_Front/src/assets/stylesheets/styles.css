@@ -1,0 +1,11 @@
+nav.navbar {
+  background: #5cb85c;
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.col-md-4 {
+  margin: auto;
+}
