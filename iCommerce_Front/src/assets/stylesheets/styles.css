@@ -9,3 +9,7 @@ nav.navbar {
 .col-md-4 {
   margin: auto;
 }
+
+.container {
+  text-align: center;
+}
