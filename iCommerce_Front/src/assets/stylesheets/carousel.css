@@ -231,7 +231,7 @@
 }
 
 #slider1 {
-  margin: 20px;
+  margin: 50px;
   font-family: 'Lato';
 }
 #slider1 > ul > li:nth-of-type(3) {

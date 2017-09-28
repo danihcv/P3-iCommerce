@@ -1,17 +1,17 @@
 <header>
   <nav class="navbar">
     <div class="logo">
-      <a href="#">
+      <a [routerLink]="['/']">
         <img src="http://icommerce.rezkii.com/wp-content/uploads/sites/149/2016/04/cropped-icommerce-appicon.png" height="50px">
       </a>
     </div>
-    <div class="col-md-4">
+    <button type="button" class="btn btn-default" [routerLink]="['login']">Login</button>
+    <div class="container">
       <div class="input-group">
         <input class="form-control" placeholder="Buscar..." aria-describedby="basic-addon1">
         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
       </div>
     </div>
-    <button type="button" class="btn btn-default" [routerLink]="['/login']">Login</button>
   </nav>
 </header>
 

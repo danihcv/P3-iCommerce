@@ -6,18 +6,24 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import {LoginComponent} from "./components/login/login.component";
+import { NewProductComponent } from './components/new-product/new-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent }
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'newProduct', component: NewProductComponent }
       ]
     )
   ],
