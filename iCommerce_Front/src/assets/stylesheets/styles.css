@@ -140,3 +140,22 @@ nav.navbar .btn-default {
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+/* VIEW PRODUCT */
+.product-image {
+  height: 500px;
+  max-width: 500px;
+  display: inline-block;
+  float: left;
+  overflow: hidden;
+  margin-left: 25%;
+}
+
+.product-info {
+  text-align: left;
+  float: left;
+  display: inline-block;
+  min-width: 500px;
+  min-height: 500px;
+  padding-left: 20px;
+}

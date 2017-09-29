@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import {LoginComponent} from "./components/login/login.component";
 import { NewProductComponent } from './components/new-product/new-product.component';
-import { ViewProductComponent } from './view-product/view-product.component';
+import { ViewProductComponent } from './components/view-product/view-product.component';
 
 @NgModule({
   declarations: [
