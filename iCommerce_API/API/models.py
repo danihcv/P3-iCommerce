@@ -11,11 +11,13 @@ class User(models.Model):
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=False)
+    image = models.CharField(max_length=150, null=False)
     description = models.CharField(max_length=10000)
     price = models.FloatField(null=False)
-    category = models.CharField(max_length=50)
-    timesBought = models.IntegerField(default=0)
+    stock = models.IntegerField(default=0, null=False)
+    category = models.CharField(max_length=50, null=False)
+    timesBought = models.IntegerField(default=0, null=False)
 
     def __str__(self):
         return self.name + ' - ' + str(self.price) + ' - ' + self.category
@@ -26,7 +28,7 @@ class PurchaseHistory(models.Model):
     idUser = models.ForeignKey('User')
     totalPrice = models.FloatField(null=False)
     date = models.DateField(null=False)
-    ostentacaoCount = models.IntegerField(default=0)
+    ostentacaoCount = models.IntegerField(default=0, null=False)
     products = models.ManyToManyField('Product')
 
     def __str__(self):

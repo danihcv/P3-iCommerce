@@ -1,3 +1,35 @@
-<p>
-  new-product works!
-</p>
+<form>
+  <div class="form-group">
+    <label for="name">Nome do produto</label>
+    <input type="email" class="form-control" id="name" placeholder="Produto">
+  </div>
+  <div class="form-group">
+    <label for="description">Imagem url</label>
+    <input class="form-control" id="image" placeholder="https://i.imgur.com/oFX2Q1z.jpg">
+  </div>
+  <div class="form-group">
+    <label for="description">Descrição</label>
+    <textarea class="form-control" id="description" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="category">Categoria</label>
+    <select class="form-control" id="category">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>Outra...</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Preço</label>
+    <div class="input-group">
+      <span class="input-group-addon" id="price-addon">R$</span>
+      <input type="number" class="form-control" placeholder="100,00" aria-describedby="price-addon" id="price">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="storage">Quantidade em estoque</label>
+    <input type="number" class="form-control" id="storage" placeholder="500">
+  </div>
+</form>
