@@ -1,18 +1,18 @@
 <div class="container">
-  <img align="top" class="product-image" src="https://www.kotous.com/media/catalog/product/cache/2/image/650x/040ec09b1e35df139433887a97daa66f/j/o/jokernew-6.jpg"/>
+  <img align="top" class="product-image" src="{{ product?.image }}"/>
   <div class="product-info">
-    <h2>Joker Figure</h2>
+    <h2>{{ product?.name }}</h2>
     <div>
-      <h3>Preço</h3> <span>R$ 150,00</span>
+      <h3>Preço</h3> <span>{{ product?.price | currency:'BRL':true:'1.2-2' }}</span>
     </div>
     <div>
-      <h3>Descrição</h3> <span>A hell of an action figure!</span>
+      <h3>Descrição</h3> <span>{{ product?.description }}</span>
     </div>
     <div>
-      <h3>Categoria</h3> <span>Action figure</span>
+      <h3>Categoria</h3> <span>{{ product?.category }}</span>
     </div>
     <div>
-      <h3>Estoque restante</h3> <span>1</span>
+      <h3>Estoque restante</h3> <span>{{ product?.stock }}</span>
     </div>
   </div>
 </div>
