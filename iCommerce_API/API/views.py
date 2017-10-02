@@ -18,10 +18,13 @@ class ProductList(APIView):
         except Product.DoesNotExist:
             raise Http404
 
-    # Returns a list of all products registered
-    def get(self, request):
-        products = Product.objects.all()
+    # Returns the product with matching id or a list of all products registered
+    def get(self, request, id=-1):
+        products = Product.objects.all().order_by('-id')
         serializer = ProductSerializer(products, many=True)
+        if id != -1:
+            products = self.get_object(id)
+            serializer = ProductSerializer(products, many=False)
         return Response(serializer.data)
 
     # Creates a new product
@@ -59,9 +62,16 @@ class SearchProductsByNameList(APIView):
 # search/category/:category/:maxSize (let maxSize empty to return all products)
 class SearchProductsByCategoryList(APIView):
     # Returns a list of all products which belongs to the past category
-    def get(self, request, category, maxSize=sys.maxsize):
-        products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
-        serializer = ProductSerializer(products, many=True)
+    def get(self, request, category='', maxSize=sys.maxsize):
+        if category == '':
+            products = Product.objects.order_by('-category').values('category').distinct()
+            categories = []
+            for dict in products:
+                categories += [dict['category']]
+            return Response(categories)
+        else:
+            products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
+            serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
