@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import {LoginComponent} from "./components/login/login.component";
+import {LoginComponent} from './components/login/login.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { ViewProductComponent } from './components/view-product/view-product.component';
 import { ProductService } from './services/product.service';
+import { SearchProductComponent } from './components/search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProductService } from './services/product.service';
     HomeComponent,
     LoginComponent,
     NewProductComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,9 @@ import { ProductService } from './services/product.service';
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'newProduct', component: NewProductComponent },
-      { path: 'product/:id', component: ViewProductComponent }
+      { path: 'product/:id', component: ViewProductComponent },
+      { path: 'search/:term', component: SearchProductComponent },
+      { path: '**', redirectTo: '' }
       ]
     )
   ],

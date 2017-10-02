@@ -32,6 +32,11 @@ nav.navbar .btn-default {
   right: 0;
 }
 
+nav.navbar .input-group-btn .btn-default {
+   position: relative;
+   margin: 0 0 0 -1px;
+ }
+
 .container {
   text-align: center;
   margin: auto;
