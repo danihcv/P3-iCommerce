@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 export class ProductService {
   url = 'http://localhost:8000/api';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getProduct(id: number) {
     return this.http.get(this.url + '/products/' + id)
@@ -20,6 +20,21 @@ export class ProductService {
 
   createProduct(obj) {
     return this.http.post(this.url + '/products', obj)
+      .map((res: Response) => res.json());
+  }
+
+  getObjectsByName(name: string) {
+    return this.http.get(this.url + '/search/name/' + name)
+      .map((res: Response) => res.json());
+  }
+
+  getCategories() {
+    return this.http.get(this.url + '/allCategories/5')
+      .map((res: Response) => res.json());
+  }
+
+  getNewerProducts() {
+    return this.http.get(this.url + '/allProducts/5')
       .map((res: Response) => res.json());
   }
 }

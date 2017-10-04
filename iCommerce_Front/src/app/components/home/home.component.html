@@ -1,13 +1,10 @@
 <div class="container">
   <div class="panel panel-default float-left">
     <!-- Default panel contents -->
-    <div class="panel-heading">Categoria</div>
+    <div class="panel-heading">Categorias</div>
     <!-- List group -->
     <ul class="list-group">
-      <li class="list-group-item">Action figures</li>
-      <li class="list-group-item">Canecas</li>
-      <li class="list-group-item">Camisas</li>
-      <li class="list-group-item">Livros</li>
+      <li class="list-group-item" *ngFor="let cat of categories">{{ cat }}</li>
     </ul>
   </div>
 
@@ -53,11 +50,7 @@
     <div class="panel-heading">Recomendados</div>
     <!-- List group -->
     <ul class="list-group">
-      <li class="list-group-item">Cálculo 1 - James Stewart</li>
-      <li class="list-group-item">Física mecânica - Halliday</li>
-      <li class="list-group-item">Camisa IC - Azul</li>
-      <li class="list-group-item">Camisa EC - Azul</li>
-      <li class="list-group-item">Camisa CC - Azul</li>
+      <li class="list-group-item" *ngFor="let prod of newProducts">{{ prod.name }}</li>
     </ul>
   </div>
 

@@ -1,3 +1,14 @@
 <div class="container">
   <h1>Buscar <small>{{ term }}</small></h1>
 </div>
+<div class="media" *ngFor="let prod of products">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="{{ prod.image }}" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ prod.name }}</h4>
+    {{ prod.description }}
+  </div>
+</div>

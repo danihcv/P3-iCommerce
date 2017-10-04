@@ -13,10 +13,16 @@
   </div>
   <div class="form-group">
     <label for="category">Categoria</label>
-    <select class="form-control" id="category" name="category" [(ngModel)]="category">
+    <select #test class="form-control" id="category" name="category" [(ngModel)]="category" (change)="change(test)">
+      <option selected hidden>-- Selecione --</option>
       <option *ngFor="let cat of categoryList">{{ cat }}</option>
-      <option>Outra...</option>
+      <option value="">Outra...</option>
     </select>
+
+    <div class="col-lg-6 block" *ngIf="createNewCategory">
+      <label for="newCategory">Criar nova categoria</label>
+      <input class="form-control" id="newCategory" name="newCategory" placeholder="Categoria nova" [(ngModel)]="newCategory">
+    </div>
   </div>
   <div class="form-group">
     <label for="price">Preço</label>

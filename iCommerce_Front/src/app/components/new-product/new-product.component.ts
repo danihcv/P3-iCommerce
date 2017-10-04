@@ -14,6 +14,8 @@ export class NewProductComponent implements OnInit {
   stock: number;
 
   categoryList: string[];
+  createNewCategory = false;
+  newCategory: string = '';
 
   constructor(private productService: ProductService) {
     productService.getCategoryList().subscribe( (data: string[]) => {
@@ -25,6 +27,13 @@ export class NewProductComponent implements OnInit {
 
   submit() {
     this.productService.createProduct({'name': this.name, 'image': this.image, 'description': this.description,
-      'price': this.price, 'category': this.category, 'stock': this.stock}).subscribe();
+      'price': this.price, 'category': this.createNewCategory ? this.newCategory : this.category, 'stock': this.stock}).subscribe();
+  }
+
+  change(data) {
+    this.createNewCategory = data.value === '';
+    if (data.value === '') {
+      this.newCategory = '';
+    }
   }
 }
