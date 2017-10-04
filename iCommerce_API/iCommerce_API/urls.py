@@ -7,7 +7,12 @@ from API import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/products/(?P<id>[0-9]+)$', views.ProductList.as_view()),
-    url(r'^api/products$', views.ProductList.as_view()),
+
+    url(r'^api/allProducts/(?P<maxSize>[0-9]+)$', views.AllProductsList.as_view()),
+    url(r'^api/allProducts$', views.AllProductsList.as_view()),
+
+    url(r'^api/allCategories/(?P<maxSize>[0-9]+)$', views.AllCategoriesList.as_view()),
+    url(r'^api/allCategories', views.AllCategoriesList.as_view()),
 
     url(r'^api/search/name/(?P<name>.+)/(?P<maxSize>[0-9]+)$', views.SearchProductsByNameList.as_view()),
     url(r'^api/search/name/(?P<name>.+)$', views.SearchProductsByNameList.as_view()),

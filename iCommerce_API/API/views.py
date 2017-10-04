@@ -18,13 +18,10 @@ class ProductList(APIView):
         except Product.DoesNotExist:
             raise Http404
 
-    # Returns the product with matching id or a list of all products registered
-    def get(self, request, id=-1):
-        products = Product.objects.all().order_by('-id')
-        serializer = ProductSerializer(products, many=True)
-        if id != -1:
-            products = self.get_object(id)
-            serializer = ProductSerializer(products, many=False)
+    # Returns the product with matching id
+    def get(self, request, id):
+        products = self.get_object(id)
+        serializer = ProductSerializer(products, many=False)
         return Response(serializer.data)
 
     # Creates a new product
@@ -50,6 +47,27 @@ class ProductList(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# allProducts/:maxSize
+class AllProductsList(APIView):
+    # Returns a list with size maxSize containing the most recent products
+    def get(self, request, maxSize=sys.maxsize):
+        products = Product.objects.all().order_by('-id')[:int(maxSize)]
+        serializer = ProductSerializer(products, many=True)
+
+        return Response(serializer.data)
+
+
+# allCategories/:maxSize
+class AllCategoriesList(APIView):
+    # Returns a list with size maxSize containing all the categories
+    def get(self, request, maxSize=sys.maxsize):
+        products = Product.objects.values('category').distinct()[:int(maxSize)]
+        categories = []
+        for dict in products:
+            categories += [dict['category']]
+        return Response(categories)
+
+
 # search/name/:name/:maxSize (let maxSize empty to return all products)
 class SearchProductsByNameList(APIView):
     # Returns a list of all products which has the name similar to parameter
@@ -62,16 +80,9 @@ class SearchProductsByNameList(APIView):
 # search/category/:category/:maxSize (let maxSize empty to return all products)
 class SearchProductsByCategoryList(APIView):
     # Returns a list of all products which belongs to the past category
-    def get(self, request, category='', maxSize=sys.maxsize):
-        if category == '':
-            products = Product.objects.order_by('-category').values('category').distinct()
-            categories = []
-            for dict in products:
-                categories += [dict['category']]
-            return Response(categories)
-        else:
-            products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
-            serializer = ProductSerializer(products, many=True)
+    def get(self, request, category, maxSize=sys.maxsize):
+        products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
+        serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
