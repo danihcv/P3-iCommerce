@@ -6,7 +6,8 @@ from API import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/products/(?P<id>[0-9]+)$', views.ProductList.as_view()),
+    url(r'^api/product/(?P<id>[0-9]+)$', views.ProductDetail.as_view()),
+    url(r'^api/product$', views.ProductList.as_view()),
 
     url(r'^api/allProducts/(?P<maxSize>[0-9]+)$', views.AllProductsList.as_view()),
     url(r'^api/allProducts$', views.AllProductsList.as_view()),
@@ -24,7 +25,14 @@ urlpatterns = [
     url(r'^api/search/popular/(?P<maxSize>[0-9]+)$', views.SearchProductsByPopularityList.as_view()),
     url(r'^api/search/popular$', views.SearchProductsByPopularityList.as_view()),
 
+    url(r'^api/purchase/(?P<id>[0-9]+)$', views.PurchaseHistoryDetail.as_view()),
     url(r'^api/purchase$', views.PurchaseHistoryList.as_view()),
+
+    url(r'^api/user/(?P<id>[0-9]+)$', views.UserDetail.as_view()),
+    url(r'^api/user$', views.UserList.as_view()),
+
+    url(r'^api/latestPurchases/(?P<id>[0-9]+)/(?P<maxSize>[0-9]+)$', views.AllPurchaseHistoryDetail.as_view()),
+    url(r'^api/latestPurchases/(?P<id>[0-9]+)$', views.AllPurchaseHistoryDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

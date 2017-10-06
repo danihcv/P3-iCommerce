@@ -9,17 +9,17 @@ export class ProductService {
   constructor(private http: Http) {}
 
   getProduct(id: number) {
-    return this.http.get(this.url + '/products/' + id)
+    return this.http.get(this.url + '/product/' + id)
       .map((res:Response) => res.json());
   }
 
   getCategoryList() {
-    return this.http.get(this.url + '/search/category')
+    return this.http.get(this.url + '/allCategories')
       .map( (res: Response) => res.json());
   }
 
   createProduct(obj) {
-    return this.http.post(this.url + '/products', obj)
+    return this.http.post(this.url + '/product', obj)
       .map((res: Response) => res.json());
   }
 
@@ -28,13 +28,18 @@ export class ProductService {
       .map((res: Response) => res.json());
   }
 
-  getCategories() {
-    return this.http.get(this.url + '/allCategories/5')
+  getCategories(count) {
+    return this.http.get(this.url + '/allCategories/' + count)
       .map((res: Response) => res.json());
   }
 
-  getNewerProducts() {
-    return this.http.get(this.url + '/allProducts/5')
+  getNewerProducts(count) {
+    return this.http.get(this.url + '/allProducts/' + count)
+      .map((res: Response) => res.json());
+  }
+
+  getTopLatestPurchases(id) {
+    return this.http.get(this.url + '/latestPurchases/' + id + '/5')
       .map((res: Response) => res.json());
   }
 }

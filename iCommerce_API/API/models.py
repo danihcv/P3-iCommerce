@@ -2,11 +2,17 @@ from django.db import models
 
 
 class User(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     isAdmin = models.BooleanField(default=False)
+    login = models.CharField(max_length=30, null=False)
+    password = models.CharField(max_length=30, null=False)
+    CPF = models.CharField(max_length=11, null=False, unique=True)
+    name = models.CharField(max_length=100, null=False)
+    CEP = models.IntegerField(null=False)
+    address = models.CharField(max_length=1000, null=False)
 
     def __str__(self):
-        return str(self.id) + ' - ' + str(self.isAdmin)
+        return self.login
 
 
 class Product(models.Model):

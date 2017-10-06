@@ -10,8 +10,19 @@ from .models import *
 from .serializers import *
 
 
-# products/
+# product/
 class ProductList(APIView):
+    # Creates a new product
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# product/:id
+class ProductDetail(APIView):
     def get_object(self, id):
         try:
             return Product.objects.get(id=id)
@@ -24,16 +35,8 @@ class ProductList(APIView):
         serializer = ProductSerializer(products, many=False)
         return Response(serializer.data)
 
-    # Creates a new product
-    def post(self, request):
-        serializer = ProductSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request):
-        product = self.get_object(request.data['id'])
+    def put(self, request, id):
+        product = self.get_object(id)
         serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -41,8 +44,8 @@ class ProductList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Deletes the product with matching id
-    def delete(self, request):
-        product = self.get_object(request.data['id'])
+    def delete(self, request, id):
+        product = self.get_object(id)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -53,7 +56,6 @@ class AllProductsList(APIView):
     def get(self, request, maxSize=sys.maxsize):
         products = Product.objects.all().order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
-
         return Response(serializer.data)
 
 
@@ -97,12 +99,6 @@ class SearchProductsByPopularityList(APIView):
 
 # purchase/
 class PurchaseHistoryList(APIView):
-    def get_object(self, id):
-        try:
-            return PurchaseHistory.objects.get(id=id)
-        except PurchaseHistory.DoesNotExist:
-            raise Http404
-
     # Creates a new purchase history
     def post(self, request):
         serializer = PurchaseHistorySerializer(data=request.data)
@@ -111,10 +107,56 @@ class PurchaseHistoryList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+# purchase/:id
+class PurchaseHistoryDetail(APIView):
+    def get_object(self, id):
+        try:
+            return PurchaseHistory.objects.get(id=id)
+        except PurchaseHistory.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id):
+        purchase = self.get_object(id)
+        serializer = PurchaseHistorySerializer(purchase)
+        return Response(serializer.data)
+
     # Increases the 'ostentação' count by 1
-    def put(self, request):
-        purchase = self.get_object(request.data['id'])
+    def put(self, request, id):
+        purchase = self.get_object(id)
         purchase.ostentacaoCount += 1
         purchase.save()
         serializer = PurchaseHistorySerializer(purchase)
+        return Response(serializer.data)
+
+
+# latestPurchases/:id/:maxSize
+class AllPurchaseHistoryDetail(APIView):
+    def get(self, request, id, maxSize=sys.maxsize):
+        purchases = PurchaseHistory.objects.filter(idUser=id).order_by('-id')[:int(maxSize)]
+        serializer = PurchaseHistorySerializer(purchases, many=True)
+        return Response(serializer.data)
+
+
+# user/
+class UserList(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# user/:id
+class UserDetail(APIView):
+    def get_object(self, id):
+        try:
+            return User.objects.get(id=id)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id):
+        user = self.get_object(id)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
