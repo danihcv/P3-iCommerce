@@ -12,12 +12,26 @@ from .serializers import *
 
 # product/
 class ProductList(APIView):
+    def get_object(self, id):
+        try:
+            return Product.objects.get(id=id)
+        except Product.DoesNotExist:
+            raise Http404
+
     # Creates a new product
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request):
+        product = self.get_object(request.data['id'])
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -37,11 +51,9 @@ class ProductDetail(APIView):
 
     def put(self, request, id):
         product = self.get_object(id)
-        serializer = ProductSerializer(product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        product.timesBought += 1
+        product.save()
+        return Response(ProductSerializer(product).data)
 
     # Deletes the product with matching id
     def delete(self, request, id):
@@ -132,10 +144,23 @@ class PurchaseHistoryDetail(APIView):
 
 # latestPurchases/:id/:maxSize
 class AllPurchaseHistoryDetail(APIView):
+    def getProduct(self, pk):
+        product = Product.objects.get(id=pk)
+        return product
+
     def get(self, request, id, maxSize=sys.maxsize):
         purchases = PurchaseHistory.objects.filter(idUser=id).order_by('-id')[:int(maxSize)]
         serializer = PurchaseHistorySerializer(purchases, many=True)
-        return Response(serializer.data)
+        output = []
+        for dict in serializer.data:
+            inject = {}
+            for k in dict:
+                inject[k] = dict[k]
+            inject['products'] = []
+            for pk in dict['products']:
+                inject['products'] += [ProductSerializer(self.getProduct(pk)).data]
+            output += [inject]
+        return Response(output)
 
 
 # user/

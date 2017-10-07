@@ -1,10 +1,12 @@
 <div class="container">
-  <div class="panel panel-default float-left">
+  <div class="panel panel-default float-left width_200">
     <!-- Default panel contents -->
     <div class="panel-heading">Categorias</div>
     <!-- List group -->
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let cat of categories">{{ cat }}</li>
+      <li class="list-group-item" *ngFor="let cat of categories">
+        <a [routerLink]="['search', 'category', cat]">{{ cat }}</a>
+      </li>
     </ul>
   </div>
 
@@ -15,15 +17,11 @@
     <input type="radio" name="slides" id="slides_4">
     <input type="radio" name="slides" id="slides_5">
     <ul>
-      <li>
-        <h1>Slide 1</h1>
-        <p>This is slide 1</p>
+      <li *ngFor="let item of newProducts">
+        <img src="{{ item.image }}" width="100%">
+        <span class="title">{{ item.name }}</span>
+        <span class="description">{{ item.description }}</span>
       </li>
-      <li> <img src="http://hd.wallpaperswide.com/thumbs/dream_house-t1.jpg"> </li>
-      <li> <img src="2.png"> </li>
-      <li> <img src="http://hd.wallpaperswide.com/thumbs/dream_house-t1.jpg"> </li>
-      <li> <img src="4.png"> </li>
-      <li> <img src="http://hd.wallpaperswide.com/thumbs/dream_house-t1.jpg"> </li>
     </ul>
     <div class="arrows">
       <label for="slides_1"></label>
@@ -45,12 +43,26 @@
     </div>
   </div>
 
-  <div class="panel panel-default float-right">
+  <div class="panel panel-default float-right width_200">
     <!-- Default panel contents -->
-    <div class="panel-heading">Recomendados</div>
+    <div class="panel-heading"><a [routerLink]="['search', 'popularity']">Recomendados</a></div>
     <!-- List group -->
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let prod of newProducts">{{ prod.name }}</li>
+      <li class="list-group-item">
+        <div class="media" *ngFor="let prod of topProducts">
+          <div class="media-left">
+            <a [routerLink]="['product', prod.id]">
+              <img class="media-object" src="{{ prod.image }}" height="64px">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a [routerLink]="['product', prod.id]">{{ prod.name }}</a>
+            </h4>
+            {{ prod.price | currency:'BRL':true:'1.2-2' }}
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 
@@ -58,10 +70,23 @@
     <!-- Default panel contents -->
     <div class="panel-heading">Últimas compras</div>
     <!-- List group -->
-    <ul class="list-group">
+    <ul class="list-group text-align_left">
       <li class="list-group-item" *ngFor="let purchase of topLatestPurchases">
-        {{ purchase.totalPrice | currency:'BRL':true:'1.2-2' }}
-        <span *ngFor="let item of purchase.products"><br>{{ item.name }}</span>
+        <label>{{ purchase.totalPrice | currency:'BRL':true:'1.2-2' }}</label>
+        <button type="button" class="btn btn-success">Ostentar</button>
+        <div class="media" *ngFor="let item of purchase.products">
+          <div class="media-left">
+            <a [routerLink]="['product', item.id]">
+              <img class="media-object" src="{{ item.image }}" height="64px">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a [routerLink]="['product', item.id]">{{ item.name }}</a>
+            </h4>
+            {{ item.price | currency:'BRL':true:'1.2-2' }}
+          </div>
+        </div>
       </li>
     </ul>
   </div>

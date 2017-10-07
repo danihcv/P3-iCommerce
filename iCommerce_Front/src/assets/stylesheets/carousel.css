@@ -235,7 +235,7 @@
   font-family: 'Lato';
 }
 #slider1 > ul > li:nth-of-type(3) {
-  background: url(1.jpg);
+  /*background: url(1.jpg);*/
 }
 #slider1 > input:nth-of-type(3):checked ~ ul #bg {
   width: 80%;
@@ -261,4 +261,14 @@
   -o-animation: sign-anim 3.5s 0.5s steps(85) forwards;
   -webkit-animation: sign-anim 3.5s 0.5s steps(85) forwards;
   animation: sign-anim 3.5s 0.5s steps(85) forwards;
+}
+
+.csslider span.title {
+  position: absolute;
+  top: 0;
+}
+
+.csslider span.description {
+  position: absolute;
+  top: 0;
 }

@@ -10,7 +10,9 @@ import {LoginComponent} from './components/login/login.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { ViewProductComponent } from './components/view-product/view-product.component';
 import { ProductService } from './services/product.service';
-import { SearchProductComponent } from './components/search-product/search-product.component';
+import { SearchProductComponent } from './components/search/search-product/search-product.component';
+import { SearchCategoryComponent } from './components/search/search-category/search-category.component';
+import { SearchPopularityComponent } from './components/search/search-popularity/search-popularity.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SearchProductComponent } from './components/search-product/search-produ
     LoginComponent,
     NewProductComponent,
     ViewProductComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    SearchCategoryComponent,
+    SearchPopularityComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { SearchProductComponent } from './components/search-product/search-produ
       { path: 'login', component: LoginComponent },
       { path: 'newProduct', component: NewProductComponent },
       { path: 'product/:id', component: ViewProductComponent },
-      { path: 'search/:term', component: SearchProductComponent },
+      { path: 'search/category/:term', component: SearchCategoryComponent },
+      { path: 'search/product/:term', component: SearchProductComponent },
+      { path: 'search/popularity', component: SearchPopularityComponent },
       { path: '**', redirectTo: '' }
       ]
     )

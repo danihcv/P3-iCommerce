@@ -10,6 +10,7 @@ import {PurchaseModel} from '../../models/purchase.model';
 export class HomeComponent implements OnInit {
   categories: string[] = [];
   newProducts: Product[] = [];
+  topProducts: Product[] = [];
   topLatestPurchases: PurchaseModel[] = [];
 
   constructor(private productService: ProductService) {
@@ -25,19 +26,15 @@ export class HomeComponent implements OnInit {
 
     productService.getTopLatestPurchases(1)
       .subscribe((data: PurchaseModel[]) => {
-        this.topLatestPurchases = data;
+      this.topLatestPurchases = data;
+      });
+
+    productService.getTopRecommendedProducts(5)
+      .subscribe((data: Product[]) => {
+      this.topProducts = data;
       });
   }
 
   ngOnInit() {}
 
-  getProductName(item) {
-    let name = 'None';
-    this.productService.getProduct(item)
-      .subscribe((data: Product) => {
-      name = data.name;
-      console.log(name);
-    });
-    return name;
-  }
 }

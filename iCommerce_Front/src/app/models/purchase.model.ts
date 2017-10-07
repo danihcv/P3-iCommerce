@@ -9,15 +9,12 @@ export class PurchaseModel {
   products: Product[];
 
 
-  constructor(id: number, idUser: number, totalPrice: number, date: Date, ostentacaoCount: number, productsIDS: number[]) {
+  constructor(id: number, idUser: number, totalPrice: number, date: Date, ostentacaoCount: number, products: Product[]) {
     this.id = id;
     this.idUser = idUser;
     this.totalPrice = totalPrice;
     this.date = date;
     this.ostentacaoCount = ostentacaoCount;
-    this.products = [];
-    for (let id of productsIDS) {
-      this.products.push();
-    }
+    this.products = products;
   }
 }

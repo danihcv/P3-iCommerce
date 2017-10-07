@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6935169-cd2a-462b-90cf-0410aa334186" name="Default" comment="Novos métodos para consultar os produtos mais recentes e as categorias existentes.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/API/migrations/0002_auto_20171005_2048.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/models/purchase.model.ts" />
+    <list default="true" id="c6935169-cd2a-462b-90cf-0410aa334186" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search/search-category/search-category.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search/search-popularity/search-popularity.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search/search.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search/search.model.ts" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search-product/search-product.component.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search-product/search-product.component.ts" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/search/search-product/search-product.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/API/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API/models.py" afterPath="$PROJECT_DIR$/API/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API/serializers.py" afterPath="$PROJECT_DIR$/API/serializers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API/views.py" afterPath="$PROJECT_DIR$/API/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iCommerce_API/urls.py" afterPath="$PROJECT_DIR$/iCommerce_API/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/app.component.html" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/app.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/app.module.ts" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/app.module.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/home/home.component.html" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/home/home.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/home/home.component.ts" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/components/home/home.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/models/purchase.model.ts" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/models/purchase.model.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/app/services/product.service.ts" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/app/services/product.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/assets/stylesheets/carousel.css" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/assets/stylesheets/carousel.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iCommerce_Front/src/assets/stylesheets/styles.css" afterPath="$PROJECT_DIR$/../iCommerce_Front/src/assets/stylesheets/styles.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +35,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/API/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="37" />
+            <state relative-caret-position="356">
+              <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -50,8 +55,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/API/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="135" column="76" lean-forward="false" selection-start-line="135" selection-start-column="76" selection-end-line="135" selection-end-column="76" />
+            <state relative-caret-position="323">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -62,8 +67,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iCommerce_API/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="33" column="111" lean-forward="true" selection-start-line="33" selection-start-column="111" selection-end-line="33" selection-end-column="111" />
+            <state relative-caret-position="85">
+              <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -81,6 +86,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>CORS</find>
+      <find>timesBought</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,8 +99,8 @@
         <option value="$PROJECT_DIR$/iCommerce_API/settings.py" />
         <option value="$PROJECT_DIR$/API/serializers.py" />
         <option value="$PROJECT_DIR$/API/models.py" />
-        <option value="$PROJECT_DIR$/API/views.py" />
         <option value="$PROJECT_DIR$/iCommerce_API/urls.py" />
+        <option value="$PROJECT_DIR$/API/views.py" />
       </list>
     </option>
   </component>
@@ -415,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507079007812</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Model User feito; novas views feitas para User, PurchaseHistory; e views de Product reorganizadas.">
+      <created>1507258147376</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507258147376</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -430,15 +443,15 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16033435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16261399" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22697368" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35486323" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35486323" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -463,7 +476,8 @@
     <MESSAGE value="Todas funcionalidades PUT, POST e DELETE implementadas.&#10;Corpo da API finalizado." />
     <MESSAGE value="CORS configurado e método para obter categorias implementado." />
     <MESSAGE value="Novos métodos para consultar os produtos mais recentes e as categorias existentes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Novos métodos para consultar os produtos mais recentes e as categorias existentes." />
+    <MESSAGE value="Model User feito; novas views feitas para User, PurchaseHistory; e views de Product reorganizadas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Model User feito; novas views feitas para User, PurchaseHistory; e views de Product reorganizadas." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -853,22 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iCommerce_API/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="33" column="111" lean-forward="true" selection-start-line="33" selection-start-column="111" selection-end-line="33" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/API/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -877,10 +875,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API/views.py">
+    <entry file="file://$PROJECT_DIR$/API/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
-          <caret line="135" column="76" lean-forward="false" selection-start-line="135" selection-start-column="76" selection-end-line="135" selection-end-column="76" />
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iCommerce_API/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

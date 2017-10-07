@@ -65,6 +65,14 @@ nav.navbar .input-group-btn .btn-default {
   clear: both;
 }
 
+.text-align_left {
+  text-align: left;
+}
+
+.width_200 {
+  width: 200px;
+}
+
 /* login */
 .login-page {
   width: 360px;

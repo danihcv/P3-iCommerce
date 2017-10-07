@@ -42,4 +42,18 @@ export class ProductService {
     return this.http.get(this.url + '/latestPurchases/' + id + '/5')
       .map((res: Response) => res.json());
   }
+
+  getProductsByCategory(term: string) {
+    return this.http.get(this.url + '/search/category/' + term)
+      .map((res: Response) => res.json());
+  }
+
+  getTopRecommendedProducts(count?: number) {
+    if (count !== undefined) {
+      return this.http.get(this.url + '/search/popular/' + count)
+      .map((res: Response) => res.json());
+    }
+    return this.http.get(this.url + '/search/popular')
+      .map((res: Response) => res.json());
+  }
 }
