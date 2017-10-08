@@ -1,34 +1,83 @@
 <form>
   <div class="form-group">
     <label for="name">Nome do produto</label>
-    <input type="email" class="form-control" id="name" name="name" placeholder="Produto" [(ngModel)]="name">
+    <input required class="form-control" id="name" name="name" placeholder="Produto"
+           [(ngModel)]="name" #inpName="ngModel" (focus)="resetErrors('name')">
+
+    <div *ngIf="(inpName.invalid && (inpName.dirty || inpName.touched)) || gotError['name']" class="alert alert-danger">
+      <div *ngIf="inpName.errors?.required && !gotError['name']">
+        Escolha um nome para o produto
+      </div>
+      <div *ngIf="gotError['name']">
+        Nome inválido
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="description">Imagem url</label>
-    <input class="form-control" id="image" name="image" placeholder="https://i.imgur.com/oFX2Q1z.jpg" [(ngModel)]="image">
+    <input required class="form-control" id="image" name="image" placeholder="https://i.imgur.com/oFX2Q1z.jpg"
+           [(ngModel)]="image" #inpImg="ngModel" (focus)="resetErrors('image')">
+
+    <div *ngIf="(inpImg.invalid && (inpImg.dirty || inpImg.touched)) || gotError['image']" class="alert alert-danger">
+      <div *ngIf="inpImg.errors?.required && !gotError['image']">
+        Escolha uma imagem do produto
+      </div>
+      <div *ngIf="gotError['image']">
+        Imagem inválida
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="description">Descrição</label>
-    <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)]="description"></textarea>
+    <textarea required class="form-control" id="description" name="description" rows="3"
+              [(ngModel)]="description" #inpDesc="ngModel" (focus)="resetErrors('description')"></textarea>
+
+    <div *ngIf="(inpDesc.invalid && (inpDesc.dirty || inpDesc.touched)) || gotError['description']" class="alert alert-danger">
+      <div *ngIf="inpDesc.errors?.required && !gotError['description']">
+        Escolha uma descrição para o produto
+      </div>
+      <div *ngIf="gotError['description']">
+        Descrição inválida
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="category">Categoria</label>
-    <select #test class="form-control" id="category" name="category" [(ngModel)]="category" (change)="change(test)">
+    <select required class="form-control" id="category" name="category"
+            [(ngModel)]="category" #inpCat="ngModel" (focus)="resetErrors('category')" (change)="change(inpCat)">
       <option selected hidden>-- Selecione --</option>
       <option *ngFor="let cat of categoryList">{{ cat }}</option>
       <option value="">Outra...</option>
     </select>
-
     <div class="col-lg-6 block" *ngIf="createNewCategory">
       <label for="newCategory">Criar nova categoria</label>
       <input class="form-control" id="newCategory" name="newCategory" placeholder="Categoria nova" [(ngModel)]="newCategory">
+    </div>
+
+    <div *ngIf="(inpCat.invalid && (inpCat.dirty || inpCat.touched) && !createNewCategory) || gotError['category']" class="alert alert-danger">
+      <div *ngIf="inpCat.errors?.required && !gotError['category']">
+        Escolha a categoria do produto
+      </div>
+      <div *ngIf="gotError['category']">
+        Categoria inválida
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label for="price">Preço</label>
     <div class="input-group">
       <span class="input-group-addon" id="price-addon">R$</span>
-      <input type="number" class="form-control" placeholder="100,00" aria-describedby="price-addon" id="price" name="price" [(ngModel)]="price">
+      <input required type="number" class="form-control" placeholder="100,00" aria-describedby="price-addon" id="price" name="price"
+             [(ngModel)]="price" #inpPrice="ngModel" (focus)="resetErrors('price')">
+    </div>
+
+    <div *ngIf="(inpPrice.invalid && (inpPrice.dirty || inpPrice.touched) && !createNewCategory) || gotError['price']" class="alert alert-danger">
+      <div *ngIf="inpPrice.errors?.required && !gotError['price']">
+        Escolha o preço do produto
+      </div>
+      <div *ngIf="gotError['price']">
+        Preço inválido
+      </div>
     </div>
   </div>
   <div class="form-group">
@@ -36,5 +85,5 @@
     <input type="number" class="form-control" id="stock" name="stock" placeholder="500" [(ngModel)]="stock">
   </div>
 
-  <button (click)="submit()" type="button" class="btn btn-success" aria-haspopup="true">Action</button>
+  <button (click)="submit()" class="btn btn-success" aria-haspopup="true">Criar</button>
 </form>
