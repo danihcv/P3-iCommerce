@@ -9,6 +9,7 @@ import {Product} from '../../../models/product.model';
   templateUrl: '../update-product.html'
 })
 export class EditProductComponent extends UpdateProduct implements OnInit {
+  id: number;
 
   constructor(protected productService: ProductService,
               protected router: Router,
@@ -16,7 +17,8 @@ export class EditProductComponent extends UpdateProduct implements OnInit {
     super(productService, router);
 
   this.route.params.subscribe(params => {
-    this.productService.getProduct(+params['id']).subscribe((data: Product) => {
+    this.id = +params['id'];
+    this.productService.getProduct(this.id).subscribe((data: Product) => {
       this.name = data.name;
       this.description = data.description;
       this.image = data.image;
@@ -29,4 +31,16 @@ export class EditProductComponent extends UpdateProduct implements OnInit {
 
   ngOnInit() {}
 
+  submit() {
+    this.productService.updateProduct({'id': this.id, 'name': this.name, 'image': this.image, 'description': this.description,
+      'price': this.price, 'category': this.createNewCategory ? this.newCategory : this.category, 'stock': this.stock})
+      .subscribe(() => this.router.navigate(['']), (err) => {
+        let res = JSON.parse(err._body);
+        console.log(res);
+        this.resetErrors();
+        for (let k in res) {
+          this.gotError[k] = true;
+        }
+      });
+  }
 }

@@ -22,18 +22,7 @@ export abstract class UpdateProduct {
     });
   }
 
-  submit() {
-    this.productService.createProduct({'name': this.name, 'image': this.image, 'description': this.description,
-      'price': this.price, 'category': this.createNewCategory ? this.newCategory : this.category, 'stock': this.stock})
-      .subscribe(() => this.router.navigate(['']), (err) => {
-        let res = JSON.parse(err._body);
-        console.log(res);
-        this.resetErrors();
-        for (let k in res) {
-          this.gotError[k] = true;
-        }
-      });
-  }
+  abstract submit();
 
   change(data) {
     this.createNewCategory = data.value === '';

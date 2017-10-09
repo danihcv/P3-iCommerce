@@ -18,7 +18,7 @@ export class ProductService {
       .map( (res: Response) => res.json());
   }
 
-  createProduct(obj) {
+  createProduct(obj: any) {
     return this.http.post(this.url + '/product', obj)
       .map((res: Response) => res.json());
   }
@@ -28,17 +28,17 @@ export class ProductService {
       .map((res: Response) => res.json());
   }
 
-  getCategories(count) {
+  getCategories(count: number) {
     return this.http.get(this.url + '/allCategories/' + count)
       .map((res: Response) => res.json());
   }
 
-  getNewerProducts(count) {
+  getNewerProducts(count: number) {
     return this.http.get(this.url + '/allProducts/' + count)
       .map((res: Response) => res.json());
   }
 
-  getTopLatestPurchases(id) {
+  getTopLatestPurchases(id: number) {
     return this.http.get(this.url + '/latestPurchases/' + id + '/5')
       .map((res: Response) => res.json());
   }
@@ -54,6 +54,11 @@ export class ProductService {
       .map((res: Response) => res.json());
     }
     return this.http.get(this.url + '/search/popular')
+      .map((res: Response) => res.json());
+  }
+
+  updateProduct(obj: any) {
+    return this.http.put(this.url + '/product', obj)
       .map((res: Response) => res.json());
   }
 }
