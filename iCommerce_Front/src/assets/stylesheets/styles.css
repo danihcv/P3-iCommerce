@@ -21,15 +21,16 @@ nav.navbar .logo {
 }
 
 nav.navbar .container {
-  max-width: 80%;
-  margin: 7px auto;
-  padding: 0;
+  max-width: 50%;
+  margin: 0;
+  padding: 7px;
+  display: inline-block;
 }
 
 nav.navbar .btn-default {
-  position: absolute;
+  position: relative;
   margin: 7px;
-  right: 0;
+  float: right;
 }
 
 nav.navbar .input-group-btn .btn-default {
@@ -174,4 +175,9 @@ nav.navbar .input-group-btn .btn-default {
   min-width: 500px;
   min-height: 500px;
   padding-left: 20px;
+}
+
+/* CHECKOUT */
+.media-body {
+  width: auto;
 }

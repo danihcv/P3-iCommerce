@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Product)
 admin.site.register(PurchaseHistory)
+admin.site.register(PurchasedProducts)

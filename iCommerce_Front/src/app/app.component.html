@@ -5,7 +5,6 @@
         <img src="http://icommerce.rezkii.com/wp-content/uploads/sites/149/2016/04/cropped-icommerce-appicon.png" height="50px">
       </a>
     </div>
-    <button type="button" class="btn btn-default" [routerLink]="['login']">Login</button>
     <div class="container">
       <div class="input-group">
         <input name="searchBar" class="form-control" placeholder="Buscar..." aria-describedby="basic-addon1" [(ngModel)]="searchValue">
@@ -16,6 +15,8 @@
         </span>
       </div>
     </div>
+    <button type="button" class="btn btn-default" [routerLink]="['login']">Login</button>
+    <button type="button" class="btn btn-default" [routerLink]="['checkout']">Carrinho</button>
   </nav>
 </header>
 

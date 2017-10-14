@@ -14,5 +14,11 @@
     <div>
       <h3>Estoque restante</h3> <span>{{ product?.stock }}</span>
     </div>
+
+    <form>
+      <label>Checkout</label>
+      <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
+      <button type="button" class="btn btn-success" (click)="addToCheckout()">+Carrinho</button>
+    </form>
   </div>
 </div>

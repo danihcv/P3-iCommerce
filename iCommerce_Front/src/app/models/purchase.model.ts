@@ -6,10 +6,10 @@ export class PurchaseModel {
   totalPrice: number;
   date: Date;
   ostentacaoCount: number;
-  products: Product[];
+  products: any[];
 
 
-  constructor(id: number, idUser: number, totalPrice: number, date: Date, ostentacaoCount: number, products: Product[]) {
+  constructor(id: number, idUser: number, totalPrice: number, date: Date, ostentacaoCount: number, products: any[]) {
     this.id = id;
     this.idUser = idUser;
     this.totalPrice = totalPrice;

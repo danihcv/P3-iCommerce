@@ -3,12 +3,14 @@
 </div>
 <div class="media" *ngFor="let prod of products">
   <div class="media-left">
-    <a href="#">
-      <img class="media-object" src="{{ prod.image }}" alt="{{ prod.description }}">
+    <a [routerLink]="['/product', prod.id]">
+      <img class="media-object" src="{{ prod.image }}" alt="{{ prod.description }}" height="72px">
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading">{{ prod.name }}</h4>
+    <a [routerLink]="['/product', prod.id]">
+      <h4 class="media-heading">{{ prod.name }}</h4>
+    </a>
     <span class="price">{{ prod.price | currency:'BRL':true:'1.2-2' }}</span>
     <span class="description">{{ prod.description }}</span>
   </div>

@@ -82,7 +82,7 @@
           </div>
           <div class="media-body">
             <h4 class="media-heading">
-              <a [routerLink]="['product', item.id]">{{ item.name }}</a>
+              <a [routerLink]="['product', item.id]">{{ item.name }}</a> <small>x {{ item.quantity }}</small>
             </h4>
             {{ item.price | currency:'BRL':true:'1.2-2' }}
           </div>

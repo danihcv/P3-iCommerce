@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class User(models.Model):
@@ -21,7 +22,7 @@ class Product(models.Model):
     image = models.CharField(max_length=150, null=False)
     description = models.CharField(max_length=10000)
     price = models.FloatField(null=False)
-    stock = models.IntegerField(default=0, null=False)
+    stock = models.PositiveIntegerField(default=0, null=False)
     category = models.CharField(max_length=50, null=False)
     timesBought = models.IntegerField(default=0, null=False)
 
@@ -35,7 +36,16 @@ class PurchaseHistory(models.Model):
     totalPrice = models.FloatField(null=False)
     date = models.DateField(null=False)
     ostentacaoCount = models.IntegerField(default=0, null=False)
-    products = models.ManyToManyField('Product')
+    # products = models.ManyToManyField('Product')
 
     def __str__(self):
         return str(self.id) + '; User: ' + str(self.idUser) + '; Total price: ' + str(self.totalPrice) + '; Date: ' + str(self.date)
+
+
+class PurchasedProducts(models.Model):
+    idPurchase = models.ForeignKey('PurchaseHistory')
+    idProduct = models.ForeignKey('Product')
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+
+    def __str__(self):
+        return str(self.idPurchase) + ' ' + str(self.idProduct)

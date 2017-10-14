@@ -10,7 +10,7 @@ from .models import *
 from .serializers import *
 
 
-# product/
+# product
 class ProductList(APIView):
     def get_object(self, id):
         try:
@@ -116,6 +116,17 @@ class PurchaseHistoryList(APIView):
         serializer = PurchaseHistorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+
+            items = request.data['products']
+            for k in items:
+                k['idPurchase'] = serializer.data['id']
+                itemSerializer = PurchasedProductsSerializer(data=k)
+                if itemSerializer.is_valid():
+                    itemSerializer.save()
+                    product = Product.objects.get(id=k['idProduct'])
+                    product.stock -= k['quantity']
+                    product.save()
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -157,8 +168,13 @@ class AllPurchaseHistoryDetail(APIView):
             for k in dict:
                 inject[k] = dict[k]
             inject['products'] = []
-            for pk in dict['products']:
-                inject['products'] += [ProductSerializer(self.getProduct(pk)).data]
+            purchasedProds = PurchasedProducts.objects.filter(idPurchase=dict['id'])
+            items = PurchasedProductsSerializer(purchasedProds, many=True).data
+            for pk in items:
+                pi = ProductSerializer(self.getProduct(pk['idProduct'])).data
+                pi['quantity'] = pk['quantity']
+
+                inject['products'] += [pi]
             output += [inject]
         return Response(output)
 
