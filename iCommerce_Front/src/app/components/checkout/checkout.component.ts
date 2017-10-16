@@ -30,8 +30,9 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = tPrice;
   }
 
-  remove(idx: number) {
-    this.products.splice(idx, 1);
+  remove(id: number) {
+    this.products = this.checkoutService.removeProductFromCheckout(id);
+//    this.products.splice(idx, 1);
     this.recalculateTotalPrice();
   }
 

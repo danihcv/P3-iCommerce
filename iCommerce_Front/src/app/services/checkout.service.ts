@@ -25,6 +25,7 @@ export class CheckoutService {
 
   removeProductFromCheckout(prodID) {
     delete this.products[prodID];
+    return this.getProductsToCheckout();
   }
 
   getProductsToCheckout() {
@@ -38,5 +39,9 @@ export class CheckoutService {
   checkout(purch: any) {
     return this.http.post(this.url + '/purchase', purch)
       .map((res: Response) => res.json());
+  }
+
+  getCheckoutProductsCount() {
+    return Object.keys(this.products).length;
   }
 }

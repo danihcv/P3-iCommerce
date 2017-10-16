@@ -10,7 +10,7 @@ from .models import *
 from .serializers import *
 
 
-# product
+# /product
 class ProductList(APIView):
     def get_object(self, id):
         try:
@@ -26,6 +26,7 @@ class ProductList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Updates a product
     def put(self, request):
         product = self.get_object(request.data['id'])
         serializer = ProductSerializer(product, data=request.data)
@@ -35,7 +36,7 @@ class ProductList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# product/:id
+# /product/:id
 class ProductDetail(APIView):
     def get_object(self, id):
         try:
@@ -49,6 +50,7 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(products, many=False)
         return Response(serializer.data)
 
+    # Increases the "timesBought" value by 1
     def put(self, request, id):
         product = self.get_object(id)
         product.timesBought += 1
@@ -62,7 +64,7 @@ class ProductDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# allProducts/:maxSize
+# /allProducts/:maxSize (let maxSize empty to return all)
 class AllProductsList(APIView):
     # Returns a list with size maxSize containing the most recent products
     def get(self, request, maxSize=sys.maxsize):
@@ -71,9 +73,9 @@ class AllProductsList(APIView):
         return Response(serializer.data)
 
 
-# allCategories/:maxSize
+# /allCategories/:maxSize (let maxSize empty to return all)
 class AllCategoriesList(APIView):
-    # Returns a list with size maxSize containing all the categories
+    # Returns a list of size maxSize containing all the categories
     def get(self, request, maxSize=sys.maxsize):
         products = Product.objects.values('category').distinct()[:int(maxSize)]
         categories = []
@@ -82,34 +84,34 @@ class AllCategoriesList(APIView):
         return Response(categories)
 
 
-# search/name/:name/:maxSize (let maxSize empty to return all products)
+# search/name/:name/:maxSize (let maxSize empty to return all)
 class SearchProductsByNameList(APIView):
-    # Returns a list of all products which has the name similar to parameter
+    # Returns a list of size maxSize of products which has the name similar to parameter
     def get(self, request, name, maxSize=sys.maxsize):
         products = Product.objects.all().filter(name__contains=name).order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
-# search/category/:category/:maxSize (let maxSize empty to return all products)
+# search/category/:category/:maxSize (let maxSize empty to return all)
 class SearchProductsByCategoryList(APIView):
-    # Returns a list of all products which belongs to the past category
+    # Returns a list of size maxSize of products which belongs to the past category
     def get(self, request, category, maxSize=sys.maxsize):
         products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
-# search/popular/:maxSize (let maxSize empty to return all products)
+# search/popular/:maxSize (let maxSize empty to return all)
 class SearchProductsByPopularityList(APIView):
-    # Returns a list of all products sorted by popularity
+    # Returns a list of size maxSize of products sorted by popularity
     def get(self, request, maxSize=sys.maxsize):
         products = Product.objects.all().order_by('-timesBought', '-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
-# purchase/
+# /purchase/
 class PurchaseHistoryList(APIView):
     # Creates a new purchase history
     def post(self, request):
@@ -131,7 +133,7 @@ class PurchaseHistoryList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# purchase/:id
+# /purchase/:id
 class PurchaseHistoryDetail(APIView):
     def get_object(self, id):
         try:
@@ -139,6 +141,7 @@ class PurchaseHistoryDetail(APIView):
         except PurchaseHistory.DoesNotExist:
             raise Http404
 
+    # Returns the purchase with matching id
     def get(self, request, id):
         purchase = self.get_object(id)
         serializer = PurchaseHistorySerializer(purchase)
@@ -153,12 +156,13 @@ class PurchaseHistoryDetail(APIView):
         return Response(serializer.data)
 
 
-# latestPurchases/:id/:maxSize
+# /latestPurchases/:id/:maxSize (let maxSize empty to return all)
 class AllPurchaseHistoryDetail(APIView):
     def getProduct(self, pk):
         product = Product.objects.get(id=pk)
         return product
 
+    # Returns the latest purchases of the user with matching id
     def get(self, request, id, maxSize=sys.maxsize):
         purchases = PurchaseHistory.objects.filter(idUser=id).order_by('-id')[:int(maxSize)]
         serializer = PurchaseHistorySerializer(purchases, many=True)
@@ -179,8 +183,9 @@ class AllPurchaseHistoryDetail(APIView):
         return Response(output)
 
 
-# user/
+# /user/
 class UserList(APIView):
+    # Creates a new user
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -189,7 +194,7 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# user/:id
+# /user/:id
 class UserDetail(APIView):
     def get_object(self, id):
         try:
@@ -197,6 +202,7 @@ class UserDetail(APIView):
         except User.DoesNotExist:
             raise Http404
 
+    # Returns all data of the user with matching id
     def get(self, request, id):
         user = self.get_object(id)
         serializer = UserSerializer(user)

@@ -18,7 +18,7 @@
       <span class="price">{{ prod.price * prod.qnt | currency:'BRL':true:'1.2-2' }}</span>
     </div>
     <div class="media-right">
-      <button type="button" class="btn btn-danger" (click)="remove(i)">Remover</button>
+      <button type="button" class="btn btn-danger" (click)="remove(prod.id)">Remover</button>
     </div>
   </div>
   <h2>
