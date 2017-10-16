@@ -19,6 +19,7 @@
       <label>Checkout</label>
       <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
       <button type="button" class="btn btn-success" (click)="addToCheckout()">+Carrinho</button>
+      <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
     </form>
   </div>
 </div>

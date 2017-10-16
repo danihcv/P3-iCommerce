@@ -27,7 +27,7 @@ nav.navbar .container {
   display: inline-block;
 }
 
-nav.navbar .btn-default {
+nav.navbar .btn {
   position: relative;
   margin: 7px;
   float: right;

@@ -9,6 +9,7 @@ export abstract class UpdateProduct {
   price: number;
   stock: number;
 
+  action = '';
   categoryList: string[];
   createNewCategory = false;
   newCategory: string = '';

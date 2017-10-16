@@ -15,13 +15,13 @@
         </span>
       </div>
     </div>
-    <button type="button" class="btn btn-default" [routerLink]="['login']">Login</button>
-    <button type="button" class="btn btn-default" [routerLink]="['checkout']">Carrinho <small>({{ getCheckoutCount() }})</small></button>
+    <button type="button" class="btn btn-default" [routerLink]="['/login']">Login</button>
+    <button type="button" class="btn btn-info" [routerLink]="['/checkout']">Carrinho <small>({{ getCheckoutCount() }})</small></button>
+    <button type="button" class="btn btn-success" [routerLink]="['/newProduct']">+Novo produto</button>
   </nav>
 </header>
 
 <ol class="breadcrumb">
   <li><a [routerLink]="['/']">Home</a></li>
 </ol>
-
 <router-outlet></router-outlet>

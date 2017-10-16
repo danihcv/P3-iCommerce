@@ -19,7 +19,7 @@ class User(models.Model):
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=False)
-    image = models.CharField(max_length=150, null=False)
+    image = models.CharField(max_length=250, null=False)
     description = models.CharField(max_length=10000)
     price = models.FloatField(null=False)
     stock = models.PositiveIntegerField(default=0, null=False)

@@ -13,6 +13,7 @@ export class NewProductComponent extends UpdateProduct implements OnInit {
   constructor(protected productService: ProductService,
               protected router: Router) {
     super(productService, router);
+    this.action = 'Criar';
   }
 
   ngOnInit() {}

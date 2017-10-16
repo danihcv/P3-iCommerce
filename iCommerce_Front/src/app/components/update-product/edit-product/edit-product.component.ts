@@ -15,6 +15,7 @@ export class EditProductComponent extends UpdateProduct implements OnInit {
               protected router: Router,
               private route: ActivatedRoute) {
     super(productService, router);
+    this.action = 'Salvar';
 
   this.route.params.subscribe(params => {
     this.id = +params['id'];

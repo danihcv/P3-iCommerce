@@ -127,6 +127,7 @@ class PurchaseHistoryList(APIView):
                     itemSerializer.save()
                     product = Product.objects.get(id=k['idProduct'])
                     product.stock -= k['quantity']
+                    product.timesBought += 1
                     product.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
