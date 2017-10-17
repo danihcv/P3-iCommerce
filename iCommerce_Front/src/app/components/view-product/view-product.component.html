@@ -1,25 +1,29 @@
-<div class="container">
-  <img align="top" class="product-image" src="{{ product?.image }}"/>
-  <div class="product-info">
-    <h2>{{ product?.name }}</h2>
-    <div>
-      <h3>Preço</h3> <span>{{ product?.price | currency:'BRL':true:'1.2-2' }}</span>
-    </div>
-    <div>
-      <h3>Descrição</h3> <span>{{ product?.description }}</span>
-    </div>
-    <div>
-      <h3>Categoria</h3> <span>{{ product?.category }}</span>
-    </div>
-    <div>
-      <h3>Estoque restante</h3> <span>{{ product?.stock }}</span>
-    </div>
+<div class="cont">
+  <div class="center-left half">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/718pIJ74CkL.jpg" height="500px"/>
+  </div>
+  <div class="center-right half">
+    <div class="product-info">
+      <h2>{{ product?.name }}</h2>
+      <div>
+        <h3>Preço</h3> <span>{{ product?.price | currency:'BRL':true:'1.2-2' }}</span>
+      </div>
+      <div>
+        <h3>Descrição</h3> <span>{{ product?.description }}</span>
+      </div>
+      <div>
+        <h3>Categoria</h3> <span>{{ product?.category }}</span>
+      </div>
+      <div>
+        <h3>Estoque restante</h3> <span>{{ product?.stock }}</span>
+      </div>
 
-    <form>
-      <label>Checkout</label>
-      <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
-      <button type="button" class="btn btn-success" (click)="addToCheckout()">+Carrinho</button>
-      <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
-    </form>
+      <form>
+        <label>Checkout</label>
+        <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
+        <button type="button" class="btn btn-success" (click)="addToCheckout()">+Carrinho</button>
+        <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
+      </form>
+    </div>
   </div>
 </div>

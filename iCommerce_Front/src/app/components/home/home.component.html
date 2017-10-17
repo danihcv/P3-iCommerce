@@ -10,6 +10,29 @@
     </ul>
   </div>
 
+  <div class="panel panel-default float-right width_200">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><a [routerLink]="['search', 'popularity']">Recomendados</a></div>
+    <!-- List group -->
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="media" *ngFor="let prod of topProducts">
+          <div class="media-left">
+            <a [routerLink]="['product', prod.id]">
+              <img class="media-object" src="{{ prod.image }}" height="64px">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a [routerLink]="['product', prod.id]">{{ prod.name }}</a>
+            </h4>
+            {{ prod.price | currency:'BRL':true:'1.2-2' }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
   <div id="slider1" class="csslider infinity">
     <input type="radio" name="slides" id="slides_1">
     <input type="radio" name="slides" id="slides_2">
@@ -41,29 +64,6 @@
         <label for="slides_5"></label>
       </div>
     </div>
-  </div>
-
-  <div class="panel panel-default float-right width_200">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><a [routerLink]="['search', 'popularity']">Recomendados</a></div>
-    <!-- List group -->
-    <ul class="list-group">
-      <li class="list-group-item">
-        <div class="media" *ngFor="let prod of topProducts">
-          <div class="media-left">
-            <a [routerLink]="['product', prod.id]">
-              <img class="media-object" src="{{ prod.image }}" height="64px">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-              <a [routerLink]="['product', prod.id]">{{ prod.name }}</a>
-            </h4>
-            {{ prod.price | currency:'BRL':true:'1.2-2' }}
-          </div>
-        </div>
-      </li>
-    </ul>
   </div>
 
   <div class="panel panel-default block">
