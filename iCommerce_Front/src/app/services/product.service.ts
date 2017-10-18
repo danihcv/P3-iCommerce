@@ -61,4 +61,9 @@ export class ProductService {
     return this.http.put(this.url + '/product', obj)
       .map((res: Response) => res.json());
   }
+
+  deleteProduct(id: number) {
+    return this.http.delete(this.url + '/product/' + id)
+      .map((res: Response) => res.json());
+  }
 }

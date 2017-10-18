@@ -42,7 +42,7 @@
     <ul>
       <li *ngFor="let item of newProducts">
         <img src="{{ item.image }}" width="100%">
-        <span class="title">{{ item.name }}</span>
+        <span class="title"><a [routerLink]="['/product', item.id]">{{ item.name }}</a></span>
         <span class="description">{{ item.description }}</span>
       </li>
     </ul>

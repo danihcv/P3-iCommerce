@@ -1,6 +1,6 @@
 <div class="cont">
   <div class="center-left half">
-    <img src="https://images-na.ssl-images-amazon.com/images/I/718pIJ74CkL.jpg" height="500px"/>
+    <img src="{{ product?.image }}" height="500px"/>
   </div>
   <div class="center-right half">
     <div class="product-info">
@@ -19,10 +19,13 @@
       </div>
 
       <form>
-        <label>Checkout</label>
-        <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
-        <button type="button" class="btn btn-success" (click)="addToCheckout()">+Carrinho</button>
+        <div *ngIf="product?.isAvailable">
+          <label>Checkout</label>
+          <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
+          <button type="button" class="btn btn-success" [class.disabled]="!hasStock()" (click)="addToCheckout()">+Carrinho</button>
+        </div>
         <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProduct()">{{ deleteOption }}</button>
       </form>
     </div>
   </div>

@@ -16,6 +16,9 @@ export class CheckoutComponent implements OnInit {
               private checkoutService: CheckoutService) {
     this.products = this.checkoutService.getProductsToCheckout();
     for (let p of this.products) {
+      if (p.qnt > p.stock) {
+        p.qnt = p.stock;
+      }
       this.totalPrice += (p.price * p.qnt);
     }
   }

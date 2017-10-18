@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
@@ -13,14 +13,19 @@ export class ViewProductComponent implements OnInit {
   product: Product;
   id: number;
   qnt: number = 1;
+  deleteOption = 'Excluir';
 
-  constructor(private router: ActivatedRoute,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private productService: ProductService,
               private checkoutService: CheckoutService) {
-    router.params.subscribe((value) => {
+    route.params.subscribe((value) => {
       this.id = +value['id'];
       productService.getProduct(this.id).subscribe((data: Product) => {
         this.product = data;
+        if (!this.product.isAvailable) {
+          this.deleteOption = 'Restaurar';
+        }
       }, err => console.log('REDIRECIONAR PARA 404!'));
     });
   }
@@ -28,12 +33,23 @@ export class ViewProductComponent implements OnInit {
   ngOnInit() {}
 
   addToCheckout() {
-    if (!Number.isInteger(this.qnt) || this.qnt <= 0) {
-      alert('Por favor, verifique a quantidade informada!');
-    } else if (this.qnt > this.product.stock) {
-      alert('Não temos tudo isso em estoque.\n:(');
-    } else if (this.qnt > 0) {
-      this.checkoutService.addProductToCheckout(this.product, this.qnt);
+    if (this.hasStock()) {
+      if (!Number.isInteger(this.qnt) || this.qnt <= 0) {
+        alert('Por favor, verifique a quantidade informada!');
+      } else if (this.qnt > this.product.stock) {
+        alert('Não temos tudo isso em estoque.\n:(');
+      } else if (this.qnt > 0) {
+        this.checkoutService.addProductToCheckout(this.product, this.qnt);
+      }
     }
+  }
+
+  hasStock() {
+    return this.product !== undefined && this.product.stock > 0;
+  }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.id)
+      .subscribe(() => this.router.navigate(['/']));
   }
 }

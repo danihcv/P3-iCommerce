@@ -181,9 +181,14 @@ nav.navbar .input-group-btn .btn-default {
 .center-right {
   text-align: left;
   margin-left: 5px;
-  width: 500px;
+  width: 400px;
 }
 
 .product-info {
   position: absolute;
+}
+
+/* Carrinho */
+.media-body {
+  width: auto;
 }
