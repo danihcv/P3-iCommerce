@@ -60,7 +60,8 @@ class ProductDetail(APIView):
     # Deletes the product with matching id
     def delete(self, request, id):
         product = self.get_object(id)
-        product.delete()
+        product.isAvailable = not product.isAvailable
+        product.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -68,7 +69,7 @@ class ProductDetail(APIView):
 class AllProductsList(APIView):
     # Returns a list with size maxSize containing the most recent products
     def get(self, request, maxSize=sys.maxsize):
-        products = Product.objects.all().order_by('-id')[:int(maxSize)]
+        products = Product.objects.all().filter(isAvailable=True).order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -77,7 +78,7 @@ class AllProductsList(APIView):
 class AllCategoriesList(APIView):
     # Returns a list of size maxSize containing all the categories
     def get(self, request, maxSize=sys.maxsize):
-        products = Product.objects.values('category').distinct()[:int(maxSize)]
+        products = Product.objects.all().filter(isAvailable=True).values('category').distinct()[:int(maxSize)]
         categories = []
         for dict in products:
             categories += [dict['category']]
@@ -88,7 +89,7 @@ class AllCategoriesList(APIView):
 class SearchProductsByNameList(APIView):
     # Returns a list of size maxSize of products which has the name similar to parameter
     def get(self, request, name, maxSize=sys.maxsize):
-        products = Product.objects.all().filter(name__contains=name).order_by('-id')[:int(maxSize)]
+        products = Product.objects.all().filter(name__contains=name, isAvailable=True).order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -97,7 +98,7 @@ class SearchProductsByNameList(APIView):
 class SearchProductsByCategoryList(APIView):
     # Returns a list of size maxSize of products which belongs to the past category
     def get(self, request, category, maxSize=sys.maxsize):
-        products = Product.objects.all().filter(category__iexact=category).order_by('-id')[:int(maxSize)]
+        products = Product.objects.all().filter(category__iexact=category, isAvailable=True).order_by('-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -106,7 +107,7 @@ class SearchProductsByCategoryList(APIView):
 class SearchProductsByPopularityList(APIView):
     # Returns a list of size maxSize of products sorted by popularity
     def get(self, request, maxSize=sys.maxsize):
-        products = Product.objects.all().order_by('-timesBought', '-id')[:int(maxSize)]
+        products = Product.objects.all().filter(isAvailable=True).order_by('-timesBought', '-id')[:int(maxSize)]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 

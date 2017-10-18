@@ -25,6 +25,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(default=0, null=False)
     category = models.CharField(max_length=50, null=False)
     timesBought = models.IntegerField(default=0, null=False)
+    isAvailable = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name + ' - ' + str(self.price) + ' - ' + self.category
