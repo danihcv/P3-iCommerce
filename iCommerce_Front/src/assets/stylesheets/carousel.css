@@ -1,6 +1,6 @@
 .csslider {
   -moz-perspective: 1300px;
-  -ms-perspective: 1300px;
+  /*-ms-perspective: 1300px;*/
   -webkit-perspective: 1300px;
   perspective: 1300px;
   display: inline-block;
@@ -43,7 +43,7 @@
 }
 .csslider > ul {
   position: relative;
-  width: 820px;
+  width: 550px;
   height: 420px;
   z-index: 1;
   font-size: 0;
@@ -65,7 +65,6 @@
   height: 100%;
   overflow: hidden;
   font-size: 15px;
-  font-size: initial;
   line-height: normal;
   -moz-transition: all 0.5s cubic-bezier(0.4, 1.3, 0.65, 1);
   -o-transition: all 0.5s ease-out;
@@ -76,6 +75,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   white-space: normal;
+  background: white;
 }
 .csslider > ul > li.scrollable {
   overflow-y: scroll;
@@ -91,7 +91,7 @@
   text-align: center;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  /*-khtml-user-select: none;*/
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -126,7 +126,7 @@
 .csslider > .arrows {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  /*-khtml-user-select: none;*/
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -177,7 +177,7 @@
 }
 .csslider > .arrows label:hover {
   box-shadow: inset 3px -3px 0 2px #71ad37;
-  margin: 0 0px;
+  margin: 0 0;
 }
 .csslider > .arrows label:before {
   content: '';
@@ -232,13 +232,13 @@
 
 #slider1 {
   margin: 50px;
-  font-family: 'Lato';
+  font-family: 'Lato', serif;
 }
 #slider1 > ul > li:nth-of-type(3) {
   /*background: url(1.jpg);*/
 }
 #slider1 > input:nth-of-type(3):checked ~ ul #bg {
-  width: 80%;
+  /*width: 80%;*/
   padding: 22px;
   -moz-transition: .5s .5s;
   -o-transition: .5s .5s;
@@ -264,11 +264,34 @@
 }
 
 .csslider span.title {
-  position: absolute;
-  top: 0;
+  font-size: 30px;
+  display: block;
 }
 
-.csslider span.description {
+.csslider span.title a {
+  color: orange;
+}
+
+.csslider span.title a:hover {
+  text-decoration: none;
+  color: orangered;
+}
+
+.csslider img {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   position: absolute;
-  top: 15px;
+}
+
+img.background {
+  z-index: -1;
+  position: absolute;
+  filter: blur(10px);
+}
+
+.csslider .heading {
+  z-index: 2;
+  position: absolute;
+  padding: 7px;
 }

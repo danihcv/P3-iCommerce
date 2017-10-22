@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 nav.navbar {
-  background: #5cb85c;
+  /*background: #5cb85c;*/
+  background: #00065d;
   /*position: fixed;*/
   top: 0;
   left: 0;
@@ -16,8 +16,8 @@ nav.navbar {
 
 nav.navbar .logo {
   display: inline-block;
-  position: absolute;
   left: 0;
+  float: left;
 }
 
 nav.navbar .container {
@@ -38,42 +38,11 @@ nav.navbar .input-group-btn .btn-default {
    margin: 0 0 0 -1px;
  }
 
-.container {
-  text-align: center;
-  margin: auto;
-  width: 100%;
-  padding: 10px;
-}
-
-.panel {
-  display: inline-block;
-  margin: auto;
-}
-
-.float-right {
-  float: right;
-}
-
-.float-left {
-  float: left;
-}
-
-.block {
-  display: block;
-}
-
+/*
 .form-group {
   clear: both;
 }
-
-.text-align_left {
-  text-align: left;
-}
-
-.width_200 {
-  width: 200px;
-}
-
+*/
 /* login */
 .login-page {
   width: 360px;
@@ -89,17 +58,18 @@ nav.navbar .input-group-btn .btn-default {
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border: 1px solid black;
 }
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
   width: 100%;
-  border: 0;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
+  border: 1px solid black;
 }
 .form button {
   font-family: "Roboto", sans-serif;
@@ -157,9 +127,177 @@ nav.navbar .input-group-btn .btn-default {
 .container .info span .fa {
   color: #EF3B3A;
 }
-
+/**/
 /************ CHECKPOINT ***************/
+body {
+  background-color: lightgrey;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.block {
+  display: block;
+}
+
+.text-align_left {
+  text-align: left;
+}
+
+.width_200 {
+  width: 200px;
+}
+
+.media-64 .media-left {
+  padding: 0;
+  width: 68px;
+  background: white;
+  border: 2px solid dimgray;
+  border-radius: 5px;
+}
+
+.media-64 .media-left img {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.media-64 .media-body {
+  padding-left: 10px;
+}
+
+span.price {
+  color: darkgreen;
+  font-weight: bold;
+  font-size: 15px;
+  padding-right: 7px;
+}
+
+a {
+  color: dodgerblue;
+}
+
+.form-group {
+  clear: both;
+}
+
+.form-group * {
+  border-color: black;
+}
+/* HomeComponent */
+#home .container {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+}
+
+#home .panel {
+  /*display: inline-block;*/
+  margin: auto;
+  border: 1px solid;
+}
+
+#home .media-left {
+  width: 74px;
+}
+
+#home .media-left .media-object {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+#home .panel-heading {
+  background-color: #3a3a3a;
+  color: white;
+}
+
+#home .list-group label {
+  font-size: 20px;
+}
+
+#home .list-group-item {
+  border-color: black;
+}
+
+#home #lastPurchases.panel .list-group .media {
+  border-top: 1px solid grey;
+  margin-top: 7px;
+  padding-top: 7px;
+}
+
+#home #lastPurchases.panel .media-body {
+  /*border-left: 1px solid grey;*/
+  padding-top: inherit;
+  padding-left: 7px;
+}
+
+#home #lastPurchases.panel .media-left {
+  width: 71px;
+  padding-right: 7px;
+}
+
+#home #lastPurchases.panel {
+  min-width: 300px;
+  max-width: 70%;
+}
+/* Search */
+#search h1 {
+  text-align: center;
+}
+
+#search .media {
+  padding: 10px 50px;
+  /*border-top: 1px solid gray;*/
+  margin: 0;
+}
+
+#search .media-left a {
+  display: block;
+  background-color: white;
+  border: 2px solid dimgray;
+  border-radius: 5px;
+  width: 76px;
+}
+
+#search .media-object {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+#search span.description {
+  display: block;
+}
+/* UpdateProduct */
+#updateProduct form {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  min-width: 200px;
+  max-width: 50%;
+}
+
+#updateProduct .alert-danger {
+  border-color: darkred;
+  border-top: none;
+  margin-bottom: 0;
+}
+
+#updateProduct .form-group {
+  margin-bottom: 20px;
+}
 /* ViewProduct */
+#viewProduct {
+  font-weight: bold;
+}
+
 .cont {
   text-align: center;
   position: relative;
@@ -188,7 +326,39 @@ nav.navbar .input-group-btn .btn-default {
   position: absolute;
 }
 
-/* Carrinho */
-.media-body {
+#viewProduct img {
+  border: 2px solid dimgray;
+  border-radius: 5px;
+}
+
+#viewProduct label {
+  display: block;
+}
+
+#viewProduct h3 {
+  color: #00065d;
+  margin-bottom: 0;
+}
+
+#viewProduct .checkout {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #002f12;
+}
+
+#viewProduct .admin-buttons {
+  margin-top: 10px;
+}
+/* Checkout */
+#checkout {
+  padding: 0 50px;
+}
+
+#checkout .media-body {
   width: auto;
+}
+
+#checkout .media {
+  border-bottom: 1px solid white;
+  padding-bottom: 13px;
 }

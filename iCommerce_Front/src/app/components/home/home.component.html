@@ -1,93 +1,98 @@
-<div class="container">
-  <div class="panel panel-default float-left width_200">
-    <!-- Default panel contents -->
-    <div class="panel-heading">Categorias</div>
-    <!-- List group -->
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let cat of categories">
-        <a [routerLink]="['search', 'category', cat]">{{ cat }}</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="panel panel-default float-right width_200">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><a [routerLink]="['search', 'popularity']">Recomendados</a></div>
-    <!-- List group -->
-    <ul class="list-group">
-      <li class="list-group-item">
-        <div class="media" *ngFor="let prod of topProducts">
-          <div class="media-left">
-            <a [routerLink]="['product', prod.id]">
-              <img class="media-object" src="{{ prod.image }}" height="64px">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-              <a [routerLink]="['product', prod.id]">{{ prod.name }}</a>
-            </h4>
-            {{ prod.price | currency:'BRL':true:'1.2-2' }}
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <div id="slider1" class="csslider infinity">
-    <input type="radio" name="slides" id="slides_1">
-    <input type="radio" name="slides" id="slides_2">
-    <input type="radio" name="slides" checked="checked" id="slides_3">
-    <input type="radio" name="slides" id="slides_4">
-    <input type="radio" name="slides" id="slides_5">
-    <ul>
-      <li *ngFor="let item of newProducts">
-        <img src="{{ item.image }}" width="100%">
-        <span class="title"><a [routerLink]="['/product', item.id]">{{ item.name }}</a></span>
-        <span class="description">{{ item.description }}</span>
-      </li>
-    </ul>
-    <div class="arrows">
-      <label for="slides_1"></label>
-      <label for="slides_2"></label>
-      <label for="slides_3"></label>
-      <label for="slides_4"></label>
-      <label for="slides_5"></label>
-      <label for="slides_1" class="goto-first"></label>
-      <label for="slides_5" class="goto-last"></label>
+<div id="home">
+  <div class="container">
+    <div class="panel panel-default float-left width_200">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Categorias</div>
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let cat of categories">
+          <a [routerLink]="['search', 'category', cat]">{{ cat }}</a>
+        </li>
+      </ul>
     </div>
-    <div class="navigation">
-      <div>
+
+    <div class="panel panel-default float-right width_200">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><a [routerLink]="['search', 'popularity']">Recomendados</a></div>
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let prod of topProducts">
+          <div class="media">
+            <div class="media-left">
+              <a>
+                <img class="media-object" src="{{ prod.image }}" height="64px" (click)="redirect('/product/' + prod.id)">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <a [routerLink]="['product', prod.id]">{{ prod.name }}</a>
+              </h4>
+              <span class="price">{{ prod.price | currency:'BRL':true:'1.2-2' }}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div id="slider1" class="csslider infinity">
+      <input type="radio" name="slides" id="slides_1">
+      <input type="radio" name="slides" id="slides_2">
+      <input type="radio" name="slides" checked="checked" id="slides_3">
+      <input type="radio" name="slides" id="slides_4">
+      <input type="radio" name="slides" id="slides_5">
+      <ul>
+        <li *ngFor="let item of newProducts">
+          <div class="heading">
+            <span class="title"><a [routerLink]="['/product', item.id]">{{ item.name }}</a></span>
+            <span class="description">{{ item.description }}</span>
+          </div>
+          <!--<img class="background" src="{{ item.image }}" width="100%">-->
+          <img src="{{ item.image }}" height="100%">
+        </li>
+      </ul>
+      <div class="arrows">
         <label for="slides_1"></label>
         <label for="slides_2"></label>
         <label for="slides_3"></label>
         <label for="slides_4"></label>
         <label for="slides_5"></label>
+        <label for="slides_1" class="goto-first"></label>
+        <label for="slides_5" class="goto-last"></label>
+      </div>
+      <div class="navigation">
+        <div>
+          <label for="slides_1"></label>
+          <label for="slides_2"></label>
+          <label for="slides_3"></label>
+          <label for="slides_4"></label>
+          <label for="slides_5"></label>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="panel panel-default block">
-    <!-- Default panel contents -->
-    <div class="panel-heading">Últimas compras</div>
-    <!-- List group -->
-    <ul class="list-group text-align_left">
-      <li class="list-group-item" *ngFor="let purchase of topLatestPurchases">
-        <label>{{ purchase.totalPrice | currency:'BRL':true:'1.2-2' }}</label>
-        <button type="button" class="btn btn-success">Ostentar</button>
-        <div class="media" *ngFor="let item of purchase.products">
-          <div class="media-left">
-            <a [routerLink]="['product', item.id]">
-              <img class="media-object" src="{{ item.image }}" height="64px">
-            </a>
+    <div id="lastPurchases" class="panel panel-default block">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Últimas compras</div>
+      <!-- List group -->
+      <ul class="list-group text-align_left">
+        <li class="list-group-item" *ngFor="let purchase of topLatestPurchases">
+          <label><span class="price">{{ purchase.totalPrice | currency:'BRL':true:'1.2-2' }}</span></label>
+          <button type="button" class="btn btn-success">Ostentar</button>
+          <div class="media" *ngFor="let item of purchase.products">
+            <div class="media-left">
+              <a [routerLink]="['product', item.id]">
+                <img class="media-object" src="{{ item.image }}" height="64px">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <a [routerLink]="['product', item.id]">{{ item.name }}</a> <small>x {{ item.quantity }}</small>
+              </h4>
+              <span class="price">{{ item.price | currency:'BRL':true:'1.2-2' }}</span>
+            </div>
           </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-              <a [routerLink]="['product', item.id]">{{ item.name }}</a> <small>x {{ item.quantity }}</small>
-            </h4>
-            {{ item.price | currency:'BRL':true:'1.2-2' }}
-          </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

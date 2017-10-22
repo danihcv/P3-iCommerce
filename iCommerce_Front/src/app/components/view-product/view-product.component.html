@@ -1,10 +1,10 @@
-<div class="cont">
+<div id="viewProduct" class="cont">
   <div class="center-left half">
     <img src="{{ product?.image }}" height="500px"/>
   </div>
   <div class="center-right half">
     <div class="product-info">
-      <h2>{{ product?.name }}</h2>
+      <h1>{{ product?.name }}</h1>
       <div>
         <h3>Preço</h3> <span>{{ product?.price | currency:'BRL':true:'1.2-2' }}</span>
       </div>
@@ -19,13 +19,15 @@
       </div>
 
       <form>
-        <div *ngIf="product?.isAvailable">
+        <div *ngIf="product?.isAvailable" class="checkout">
           <label>Checkout</label>
           <input required type="number" name="quantity" min="1" [max]="product?.stock" [(ngModel)]="qnt">
           <button type="button" class="btn btn-success" [class.disabled]="!hasStock()" (click)="addToCheckout()">+Carrinho</button>
         </div>
-        <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
-        <button type="button" class="btn btn-danger" (click)="deleteProduct()">{{ deleteOption }}</button>
+        <div class="admin-buttons">
+          <button type="button" class="btn btn-info" [routerLink]="['/editProduct', id]">Editar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct()">{{ deleteOption }}</button>
+        </div>
       </form>
     </div>
   </div>

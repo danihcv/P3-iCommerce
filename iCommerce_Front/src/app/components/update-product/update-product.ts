@@ -7,7 +7,7 @@ export abstract class UpdateProduct {
   description: string;
   category: string;
   price: number;
-  stock: number;
+  stock: number = 0;
 
   action = '';
   categoryList: string[];
@@ -41,6 +41,7 @@ export abstract class UpdateProduct {
       this.gotError['description'] = false;
       this.gotError['category'] = false;
       this.gotError['price'] = false;
+      this.gotError['stock'] = false;
     }
   }
 }

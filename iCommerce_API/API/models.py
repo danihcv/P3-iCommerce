@@ -22,7 +22,7 @@ class Product(models.Model):
     image = models.CharField(max_length=250, null=False)
     description = models.CharField(max_length=10000)
     price = models.FloatField(null=False)
-    stock = models.PositiveIntegerField(default=0, null=False)
+    stock = models.PositiveIntegerField(validators=[MinValueValidator(0)], default=0, null=False)
     category = models.CharField(max_length=50, null=False)
     timesBought = models.IntegerField(default=0, null=False)
     isAvailable = models.BooleanField(default=True)
