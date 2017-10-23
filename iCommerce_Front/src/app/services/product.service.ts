@@ -10,7 +10,7 @@ export class ProductService {
 
   getProduct(id: number) {
     return this.http.get(this.url + '/product/' + id)
-      .map((res:Response) => res.json());
+      .map((res: Response) => res.json());
   }
 
   getCategoryList() {

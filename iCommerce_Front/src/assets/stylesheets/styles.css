@@ -189,6 +189,10 @@ a {
 .form-group * {
   border-color: black;
 }
+
+.centralize-button {
+  text-align: center;
+}
 /* HomeComponent */
 #home .container {
   text-align: center;
@@ -276,6 +280,10 @@ a {
   display: block;
 }
 /* UpdateProduct */
+#updateProduct {
+  padding-bottom: 30px;
+}
+
 #updateProduct form {
   left: 0;
   right: 0;
@@ -361,4 +369,19 @@ a {
 #checkout .media {
   border-bottom: 1px solid white;
   padding-bottom: 13px;
+}
+/* Register */
+#register {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+#register input::-webkit-outer-spin-button,
+#register input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

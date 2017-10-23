@@ -16,6 +16,8 @@ import { SearchPopularityComponent } from './components/search/search-popularity
 import { EditProductComponent } from './components/update-product/edit-product/edit-product.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutService } from './services/checkout.service';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { CheckoutService } from './services/checkout.service';
     SearchCategoryComponent,
     SearchPopularityComponent,
     EditProductComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { CheckoutService } from './services/checkout.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterUserComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'newProduct', component: NewProductComponent },
       { path: 'editProduct/:id', component: EditProductComponent },
@@ -50,7 +54,8 @@ import { CheckoutService } from './services/checkout.service';
   ],
   providers: [
     ProductService,
-    CheckoutService
+    CheckoutService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
