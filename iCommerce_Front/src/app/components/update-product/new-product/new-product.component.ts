@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../../services/product.service';
 import {Router} from '@angular/router';
 import {Product} from '../../../models/product.model';
-import {UpdateProduct} from "../update-product";
+import {UpdateProduct} from '../update-product';
+import {Title} from '@angular/platform-browser';
 
 @Component({
-  selector: 'new-product',
+  selector: 'app-new-product',
   templateUrl: '../update-product.html'
 })
 export class NewProductComponent extends UpdateProduct implements OnInit {
 
   constructor(protected productService: ProductService,
-              protected router: Router) {
+              protected router: Router,
+              private titleService: Title) {
     super(productService, router);
+    this.titleService.setTitle('iCommerce - Criar produto');
     this.action = 'Criar';
   }
 

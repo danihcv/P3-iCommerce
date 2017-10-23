@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
 import {PurchaseModel} from '../../models/purchase.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
@@ -13,7 +14,9 @@ export class HomeComponent implements OnInit {
   topProducts: Product[] = [];
   topLatestPurchases: PurchaseModel[] = [];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private titleService: Title) {
+    this.titleService.setTitle('iCommerce - Home');
     productService.getCategories(5)
       .subscribe((data: string[]) => {
         this.categories = data;

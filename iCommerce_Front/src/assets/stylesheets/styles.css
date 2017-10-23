@@ -16,7 +16,7 @@ nav.navbar {
 
 nav.navbar .logo {
   display: inline-block;
-  left: 0;
+  padding-left: 10px;
   float: left;
 }
 

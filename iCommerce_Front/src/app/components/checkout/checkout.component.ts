@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CheckoutService} from '../../services/checkout.service';
 import {PurchaseModel} from '../../models/purchase.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
-  selector: 'checkout',
+  selector: 'app-checkout',
   templateUrl: './checkout.component.html'
 })
 export class CheckoutComponent implements OnInit {
@@ -13,9 +14,11 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private checkoutService: CheckoutService) {
+              private checkoutService: CheckoutService,
+              private titleService: Title) {
+    this.titleService.setTitle('iCommerce - Carrinho');
     this.products = this.checkoutService.getProductsToCheckout();
-    for (let p of this.products) {
+    for (const p of this.products) {
       if (p.qnt > p.stock) {
         p.qnt = p.stock;
       }
@@ -52,10 +55,10 @@ export class CheckoutComponent implements OnInit {
       'products': this.getProductsIDs()
     }).subscribe(() => {
         this.checkoutService.resetCheckout();
-        alert("Compra efetuada com sucesso!");
+        alert('Compra efetuada com sucesso!');
         this.router.navigate(['/']);
       },
-        () => alert("Algo deu errado!\nPor favor tente novamente mais tarde.")
+        () => alert('Algo deu errado!\nPor favor tente novamente mais tarde.')
     );
   }
 

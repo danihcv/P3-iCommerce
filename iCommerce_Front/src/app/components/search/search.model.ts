@@ -1,9 +1,12 @@
 import {Product} from '../../models/product.model';
+import {Title} from '@angular/platform-browser';
 
 export abstract class SearchModel {
   products: Product[] = [];
-  type: string = '';
-  term: string = '';
+  type = '';
+  term = '';
 
-  constructor () {}
+  constructor (protected titleService: Title) {
+    this.titleService.setTitle('iCommerce - Buscar');
+  }
 }

@@ -3,9 +3,10 @@ import {UpdateProduct} from '../update-product';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service';
 import {Product} from '../../../models/product.model';
+import {Title} from "@angular/platform-browser";
 
 @Component({
-  selector: 'edit-product',
+  selector: 'app-edit-product',
   templateUrl: '../update-product.html'
 })
 export class EditProductComponent extends UpdateProduct implements OnInit {
@@ -13,8 +14,10 @@ export class EditProductComponent extends UpdateProduct implements OnInit {
 
   constructor(protected productService: ProductService,
               protected router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private titleService: Title) {
     super(productService, router);
+    this.titleService.setTitle('iCommerce - Editar produto');
     this.action = 'Salvar';
 
   this.route.params.subscribe(params => {

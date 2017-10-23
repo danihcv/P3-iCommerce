@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register-user',
@@ -18,7 +19,10 @@ export class RegisterUserComponent implements OnInit {
 
   isCEPValid;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private titleService: Title) {
+    this.titleService.setTitle('iCommerce - Registro');
+  }
 
   ngOnInit() {
   }

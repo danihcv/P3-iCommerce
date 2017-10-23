@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
 import {CheckoutService} from '../../services/checkout.service';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-view-product',
@@ -18,15 +19,17 @@ export class ViewProductComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private productService: ProductService,
-              private checkoutService: CheckoutService) {
+              private checkoutService: CheckoutService,
+              private titleService: Title) {
     route.params.subscribe((value) => {
       this.id = +value['id'];
       productService.getProduct(this.id).subscribe((data: Product) => {
         this.product = data;
+        this.titleService.setTitle('iCommerce - ' + this.product.name);
         if (!this.product.isAvailable) {
           this.deleteOption = 'Restaurar';
         }
-      }, err => console.log('REDIRECIONAR PARA 404!'));
+      }, err => router.navigate(['/']));
     });
   }
 
