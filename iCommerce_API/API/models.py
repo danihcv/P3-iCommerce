@@ -3,17 +3,19 @@ from django.core.validators import MinValueValidator
 
 
 class User(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     isAdmin = models.BooleanField(default=False)
-    login = models.CharField(max_length=30, null=False)
-    password = models.CharField(max_length=30, null=False)
-    CPF = models.CharField(max_length=11, null=False, unique=True)
-    name = models.CharField(max_length=100, null=False)
-    CEP = models.IntegerField(null=False)
-    address = models.CharField(max_length=1000, null=False)
+    # login = models.CharField(max_length=30, null=False)
+    # password = models.CharField(max_length=30, null=False)
+    # CPF = models.CharField(max_length=11, null=False, unique=True)
+    # name = models.CharField(max_length=100, null=False)
+    CEP = models.IntegerField(blank=True, null=True)
+    # address = models.CharField(max_length=1000, null=False)
+    number = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
+    complement = models.CharField(max_length=140, blank=True, null=True)
 
     def __str__(self):
-        return self.login
+        return str(self.id)
 
 
 class Product(models.Model):

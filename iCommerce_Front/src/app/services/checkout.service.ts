@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Product} from '../models/product.model';
@@ -20,7 +20,7 @@ export class CheckoutService {
       this.products[prod.id]['qnt'] = 0;
     }
     this.products[prod.id]['qnt'] += qnt;
-    alert("+" + qnt + " '" + prod.name + "' foi adicionado ao carrinho!");
+    alert('+' + qnt + ' \'' + prod.name + '\' foi adicionado ao carrinho!');
   }
 
   removeProductFromCheckout(prodID) {

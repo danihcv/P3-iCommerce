@@ -47,7 +47,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout() {
-    console.log(this.formatDate(new Date()));
     this.checkoutService.checkout({
       'idUser': 1,
       'totalPrice': this.totalPrice,

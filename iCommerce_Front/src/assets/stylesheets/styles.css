@@ -236,10 +236,11 @@ a {
   padding-top: 7px;
 }
 
-#home #lastPurchases.panel .media-body {
+#home .media-body {
   /*border-left: 1px solid grey;*/
   padding-top: inherit;
   padding-left: 7px;
+  width: auto;
 }
 
 #home #lastPurchases.panel .media-left {
