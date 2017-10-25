@@ -18,6 +18,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutService } from './services/checkout.service';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import {UserService} from './services/user.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {UserService} from './services/user.service';
   providers: [
     ProductService,
     CheckoutService,
-    UserService
+    UserService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

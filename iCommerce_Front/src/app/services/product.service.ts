@@ -38,8 +38,8 @@ export class ProductService {
       .map((res: Response) => res.json());
   }
 
-  getTopLatestPurchases(id: number) {
-    return this.http.get(this.url + '/latestPurchases/' + id + '/5')
+  getTopLatestPurchases(username: string) {
+    return this.http.get(this.url + '/latestPurchases/' + username + '/5')
       .map((res: Response) => res.json());
   }
 

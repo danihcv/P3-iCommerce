@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CheckoutService} from '../../services/checkout.service';
-import {PurchaseModel} from '../../models/purchase.model';
 import {Title} from '@angular/platform-browser';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,7 +15,11 @@ export class CheckoutComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private checkoutService: CheckoutService,
-              private titleService: Title) {
+              private titleService: Title,
+              private userService: UserService) {
+    if (!this.userService.isLogged()) {
+      this.router.navigate(['/login']);
+    }
     this.titleService.setTitle('iCommerce - Carrinho');
     this.products = this.checkoutService.getProductsToCheckout();
     for (const p of this.products) {
@@ -30,7 +34,7 @@ export class CheckoutComponent implements OnInit {
 
   recalculateTotalPrice() {
     let tPrice = 0;
-    for (let p of this.products) {
+    for (const p of this.products) {
       tPrice += (p.price * p.qnt);
     }
     this.totalPrice = tPrice;
@@ -48,7 +52,7 @@ export class CheckoutComponent implements OnInit {
 
   checkout() {
     this.checkoutService.checkout({
-      'idUser': 1,
+      'username': 'admin',
       'totalPrice': this.totalPrice,
       'date': this.formatDate(new Date()),
       'products': this.getProductsIDs()
@@ -63,20 +67,24 @@ export class CheckoutComponent implements OnInit {
 
   getProductsIDs() {
     let ids = [];
-    for (let p of this.products) {
+    for (const p of this.products) {
       ids.push({'idProduct': p.id, 'quantity': p.qnt});
     }
     return ids;
   }
 
   formatDate(date) {
-    var d = new Date(date),
+    let d = new Date(date),
       month = '' + (d.getMonth() + 1),
       day = '' + d.getDate(),
       year = d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
 
     return [year, month, day].join('-');
   }

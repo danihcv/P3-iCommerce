@@ -3,6 +3,7 @@ import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
 import {PurchaseModel} from '../../models/purchase.model';
 import {Title} from '@angular/platform-browser';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
   topLatestPurchases: PurchaseModel[] = [];
 
   constructor(private productService: ProductService,
-              private titleService: Title) {
+              private titleService: Title,
+              private userService: UserService) {
     this.titleService.setTitle('iCommerce - Home');
     productService.getCategories(5)
       .subscribe((data: string[]) => {
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
       this.newProducts = data;
     });
 
-    productService.getTopLatestPurchases(1)
+    productService.getTopLatestPurchases('admin')
       .subscribe((data: PurchaseModel[]) => {
       this.topLatestPurchases = data;
       });
@@ -40,4 +42,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {}
 
+  isLogged() {
+    return this.userService.isLogged();
+  }
+
+  ostentar(purch: PurchaseModel) {
+    this.userService.ostentar(purch);
+  }
 }

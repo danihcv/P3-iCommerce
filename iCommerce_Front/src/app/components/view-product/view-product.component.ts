@@ -4,7 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
 import {CheckoutService} from '../../services/checkout.service';
-import {Title} from "@angular/platform-browser";
+import {Title} from '@angular/platform-browser';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-view-product',
@@ -13,14 +14,15 @@ import {Title} from "@angular/platform-browser";
 export class ViewProductComponent implements OnInit {
   product: Product;
   id: number;
-  qnt: number = 1;
+  qnt = 1;
   deleteOption = 'Excluir';
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private productService: ProductService,
               private checkoutService: CheckoutService,
-              private titleService: Title) {
+              private titleService: Title,
+              private userService: UserService) {
     route.params.subscribe((value) => {
       this.id = +value['id'];
       productService.getProduct(this.id).subscribe((data: Product) => {
@@ -54,5 +56,9 @@ export class ViewProductComponent implements OnInit {
   deleteProduct() {
     this.productService.deleteProduct(this.id)
       .subscribe(() => this.router.navigate(['/']));
+  }
+
+  isAdmin() {
+    return this.userService.isAdmin();
   }
 }

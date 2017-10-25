@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator
 
 
 class User(models.Model):
-    id = models.IntegerField(primary_key=True)
+    username = models.CharField(max_length=100, primary_key=True)
     isAdmin = models.BooleanField(default=False)
     # login = models.CharField(max_length=30, null=False)
     # password = models.CharField(max_length=30, null=False)
@@ -15,7 +15,7 @@ class User(models.Model):
     complement = models.CharField(max_length=140, blank=True, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.username)
 
 
 class Product(models.Model):
@@ -35,14 +35,14 @@ class Product(models.Model):
 
 class PurchaseHistory(models.Model):
     id = models.AutoField(primary_key=True)
-    idUser = models.ForeignKey('User')
+    username = models.ForeignKey('User')
     totalPrice = models.FloatField(null=False)
     date = models.DateField(null=False)
     ostentacaoCount = models.IntegerField(default=0, null=False)
     # products = models.ManyToManyField('Product')
 
     def __str__(self):
-        return str(self.id) + '; User: ' + str(self.idUser) + '; Total price: ' + str(self.totalPrice) + '; Date: ' + str(self.date)
+        return str(self.id) + '; User: ' + str(self.username) + '; Total price: ' + str(self.totalPrice) + '; Date: ' + str(self.date)
 
 
 class PurchasedProducts(models.Model):
