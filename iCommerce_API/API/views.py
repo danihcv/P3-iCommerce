@@ -165,8 +165,8 @@ class AllPurchaseHistoryDetail(APIView):
         return product
 
     # Returns the latest purchases of the user with matching id
-    def get(self, request, id, maxSize=sys.maxsize):
-        purchases = PurchaseHistory.objects.filter(idUser=id).order_by('-id')[:int(maxSize)]
+    def get(self, request, username, maxSize=sys.maxsize):
+        purchases = PurchaseHistory.objects.filter(username=username).order_by('-id')[:int(maxSize)]
         serializer = PurchaseHistorySerializer(purchases, many=True)
         output = []
         for dict in serializer.data:
@@ -185,7 +185,7 @@ class AllPurchaseHistoryDetail(APIView):
         return Response(output)
 
 
-# /user/
+# /user
 class UserList(APIView):
     # Creates a new user
     def post(self, request):
@@ -198,14 +198,23 @@ class UserList(APIView):
 
 # /user/:id
 class UserDetail(APIView):
-    def get_object(self, id):
+    def get_object(self, username):
         try:
-            return User.objects.get(id=id)
+            return User.objects.get(username=username)
         except User.DoesNotExist:
             raise Http404
 
     # Returns all data of the user with matching id
-    def get(self, request, id):
-        user = self.get_object(id)
+    def get(self, request, username):
+        user = self.get_object(username)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+    # Updates the user
+    def put(self, request, username):
+        user = self.get_object(request.data['username'])
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

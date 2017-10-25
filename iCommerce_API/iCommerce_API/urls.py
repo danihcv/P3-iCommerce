@@ -28,11 +28,11 @@ urlpatterns = [
     url(r'^api/purchase/(?P<id>[0-9]+)$', views.PurchaseHistoryDetail.as_view()),
     url(r'^api/purchase$', views.PurchaseHistoryList.as_view()),
 
-    url(r'^api/user/(?P<id>[0-9]+)$', views.UserDetail.as_view()),
+    url(r'^api/user/(?P<username>[a-zA-Z0-9_]*)$', views.UserDetail.as_view()),
     url(r'^api/user$', views.UserList.as_view()),
 
-    url(r'^api/latestPurchases/(?P<id>[0-9]+)/(?P<maxSize>[0-9]+)$', views.AllPurchaseHistoryDetail.as_view()),
-    url(r'^api/latestPurchases/(?P<id>[0-9]+)$', views.AllPurchaseHistoryDetail.as_view())
+    url(r'^api/latestPurchases/(?P<username>[a-zA-Z0-9_]*)/(?P<maxSize>[0-9]+)$', views.AllPurchaseHistoryDetail.as_view()),
+    url(r'^api/latestPurchases/(?P<username>[a-zA-Z0-9_]*)$', views.AllPurchaseHistoryDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
