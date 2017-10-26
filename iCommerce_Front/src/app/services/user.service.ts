@@ -86,9 +86,12 @@ export class UserService {
     }
     obj.description += 'PREÇO TOTAL: R$ ' + purchase.totalPrice + '\n\nSIM! Sou rico.\nNão me inveje, trabalhe!\n#gratidão';
 
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers, this.cookieService.get('token'));
-    this.http.post(this.networkUrl + '/user/post', obj, headers);
+    const headers = new Headers({ 'Authorization': this.cookieService.get('token')});
+    const  options = new RequestOptions({ headers: headers });
+    this.http.post(this.networkUrl + '/user/post', obj, options)
+      .subscribe((data) => alert('Ostentou!'),
+      (err) => alert('Falha na ostentação')
+    );
   }
 
   getUserFromNetwork(token: string) {

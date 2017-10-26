@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
       this.productService.getTopLatestPurchases(this.userService.getLoggedUser().username)
         .subscribe((data: PurchaseModel[]) => {
           this.topLatestPurchases = data;
-          this.isDownloading = false;
         });
     }
     return this.topLatestPurchases;
