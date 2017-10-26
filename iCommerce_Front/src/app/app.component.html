@@ -16,6 +16,7 @@
       </div>
     </div>
     <button type="button" class="btn btn-default" [routerLink]="['/register']" *ngIf="isLogged()">Conta</button>
+    <button type="button" class="btn btn-default" (click)="logout()" *ngIf="isLogged()">Logout</button>
     <button type="button" class="btn btn-default" [routerLink]="['/login']" *ngIf="!isLogged()">Login</button>
     <button type="button" class="btn btn-info" [routerLink]="['/checkout']">Carrinho <small>({{ getCheckoutCount() }})</small></button>
     <button type="button" class="btn btn-success" [routerLink]="['/newProduct']" *ngIf="isAdmin()">+Novo produto</button>

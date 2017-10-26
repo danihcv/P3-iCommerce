@@ -16,12 +16,8 @@ export class AppComponent {
               private route: ActivatedRoute,
               private cookieService: CookieService,
               private userService: UserService) {
-    this.router.events.subscribe((data: NavigationEnd) => {
-      /*console.log(this.route.);*/
-    });
+    const token = this.cookieService.get('token');
 
-    const token = this.cookieService.get('token_access');
-    console.log('token', token !== '');
     if (token !== '') {
       this.userService.loginByToken(token);
     }
@@ -36,7 +32,11 @@ export class AppComponent {
   }
 
   isAdmin() {
-    console.log('admin', this.userService.isAdmin());
+    // console.log('admin', this.userService.isAdmin());
     return this.userService.isAdmin();
+  }
+
+  logout() {
+    this.userService.logout();
   }
 }

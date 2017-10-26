@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {UserService} from '../../services/user.service';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   gotError = false;
 
-  constructor(private titleService: Title,
+  constructor(private router: Router,
+              private titleService: Title,
               private userService: UserService,
               private cookieService: CookieService) {
     this.titleService.setTitle('iCommerce - Login');
@@ -24,10 +26,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    console.log(this.obj);
     this.gotError = false;
     this.userService.login(this.obj).subscribe((netUser) => {
-      this.userService.setLoggedUser(netUser);
+      this.userService.setLoggedUser(netUser, true);
+      this.router.navigate(['/']);
     }, (err) => this.gotError = true);
   }
 }

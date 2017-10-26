@@ -1,27 +1,19 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+import {Http, Headers, Response, RequestOptions } from '@angular/http';
 import {CookieService} from 'ngx-cookie-service';
 import {User} from '../models/user.model';
 import {PurchaseModel} from '../models/purchase.model';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class UserService {
   private networkUrl = 'https://the-dank-network.herokuapp.com/api';
   private url = 'http://localhost:8000/api';
   user: User;
-/*
-  user: User = {
-    'username': 'admin',
-    'isAdmin': false,
-    'CEP': undefined,
-    'number': undefined,
-    'complement': undefined
-  };
-*/
+
   constructor(private http: Http,
-              private cookieService: CookieService) {
-    this.getUser('admin').subscribe((user) => this.user = user);
-  }
+              private cookieService: CookieService,
+              private router: Router) {}
 
   getCEP(cep: number) {
     return this.http.get('http://api.postmon.com.br/v1/cep/' + cep)
@@ -38,12 +30,12 @@ export class UserService {
   }
 
   createAuthorizationHeader(headers: Headers, token: string) {
-    headers.append('Authorization', 'Bearer ' + token);
+    headers.append('Authorization', token);
   }
 
   loginByToken(token: string) {
     this.getUserFromNetwork(token)
-      .subscribe((netUser) => this.setLoggedUser(netUser));
+      .subscribe((netUser) => this.setLoggedUser(netUser), (err) => this.cookieService.delete('token'));
   }
 
   getUser(username: string) {
@@ -51,16 +43,18 @@ export class UserService {
       .map((res: Response) => res.json());
   }
 
-  setLoggedUser(obj: any) {
-    this.cookieService.set('token_access', obj.token_access);
+  setLoggedUser(obj: any, updateToken?: boolean) {
+    if (updateToken) {
+      console.log(obj['token_type'] + obj['access_token']);
+      this.cookieService.set('token', obj['token_type'] + ' ' + obj['access_token']);
+    }
     this.getUser(obj.username)
-      .map((res: Response) => res.json())
       .subscribe((user: User) => this.user = user,
         (err) => {
-          this.http.post(this.url + '/user', obj.username)
+          this.http.post(this.url + '/user', {'username': obj.username})
             .map((res: Response) => res.json())
             .subscribe((user: User) => this.user = user,
-              (errr) => this.cookieService.delete('token_acess'));
+              (errr) => this.cookieService.delete('token'));
         });
   }
 
@@ -73,6 +67,10 @@ export class UserService {
       return this.user.isAdmin;
     }
     return false;
+  }
+
+  hasCEP() {
+    return this.user.CEP !== null;
   }
 
   ostentar(purchase: PurchaseModel) {
@@ -89,18 +87,24 @@ export class UserService {
     obj.description += 'PREÇO TOTAL: R$ ' + purchase.totalPrice + '\n\nSIM! Sou rico.\nNão me inveje, trabalhe!\n#gratidão';
 
     const headers = new Headers();
-    this.createAuthorizationHeader(headers, this.cookieService.get('token_access'));
+    this.createAuthorizationHeader(headers, this.cookieService.get('token'));
     this.http.post(this.networkUrl + '/user/post', obj, headers);
   }
 
   getUserFromNetwork(token: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers, token);
-    return this.http.get(this.networkUrl + '/user', headers)
+    const headers = new Headers({ 'Authorization': this.cookieService.get('token')});
+    const  options = new RequestOptions({ headers: headers });
+    return this.http.get(this.networkUrl + '/user', options)
       .map((res: Response) => res.json());
   }
 
   updateUser(obj: User) {
     return this.http.put(this.url + '/user/' + obj.username, obj);
+  }
+
+  logout() {
+    this.cookieService.delete('token');
+    this.user = undefined;
+    this.router.navigate(['/']);
   }
 }

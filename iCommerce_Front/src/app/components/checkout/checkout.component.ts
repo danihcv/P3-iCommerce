@@ -51,8 +51,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout() {
+    if (!this.userService.hasCEP()) {
+      alert('Por favor, cadastre seus dados pessoais para o envio.');
+      return this.router.navigate(['/register']);
+    }
     this.checkoutService.checkout({
-      'username': 'admin',
+      'username': this.userService.getLoggedUser().username,
       'totalPrice': this.totalPrice,
       'date': this.formatDate(new Date()),
       'products': this.getProductsIDs()

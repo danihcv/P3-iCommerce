@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product.model';
 import {PurchaseModel} from '../../models/purchase.model';
@@ -29,11 +29,6 @@ export class HomeComponent implements OnInit {
       this.newProducts = data;
     });
 
-    productService.getTopLatestPurchases('admin')
-      .subscribe((data: PurchaseModel[]) => {
-      this.topLatestPurchases = data;
-      });
-
     productService.getTopRecommendedProducts(5)
       .subscribe((data: Product[]) => {
       this.topProducts = data;
@@ -48,5 +43,19 @@ export class HomeComponent implements OnInit {
 
   ostentar(purch: PurchaseModel) {
     this.userService.ostentar(purch);
+  }
+
+  private isDownloading = false;
+
+  getTopLatestPurchases() {
+    if (this.userService.isLogged() && !this.isDownloading) {
+      this.isDownloading = true;
+      this.productService.getTopLatestPurchases(this.userService.getLoggedUser().username)
+        .subscribe((data: PurchaseModel[]) => {
+          this.topLatestPurchases = data;
+          this.isDownloading = false;
+        });
+    }
+    return this.topLatestPurchases;
   }
 }

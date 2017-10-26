@@ -75,7 +75,7 @@
       <div class="panel-heading">Últimas compras</div>
       <!-- List group -->
       <ul class="list-group text-align_left">
-        <li class="list-group-item" *ngFor="let purchase of topLatestPurchases">
+        <li class="list-group-item" *ngFor="let purchase of getTopLatestPurchases()">
           <label><span class="price">{{ purchase.totalPrice | currency:'BRL':true:'1.2-2' }}</span></label>
           <button type="button" class="btn btn-success" (click)="ostentar(purchase)">Ostentar</button>
           <div class="media" *ngFor="let item of purchase.products">
