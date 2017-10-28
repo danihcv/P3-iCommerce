@@ -1,0 +1,1 @@
+web: gunicorn iCommerce_API.wsgi --log-file -
