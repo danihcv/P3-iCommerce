@@ -1,7 +1,6 @@
-# Heroku
 $ pip freeze > requirements-dev.txt
-**Criação de arquivos
-**settings.py: ALLOWED_HOSTS = ['icommerce-api.herokuapp.com', 'localhost:8000', 'http://icommerce-cc.umbler.net/']
+--Criação de arquivos
+--settings.py: ALLOWED_HOSTS = ['icommerce-api.herokuapp.com', 'localhost:8000', 'http://icommerce-cc.umbler.net/']
 $ heroku apps:create icommerce-api
 $ python .\manage.py runserver
 $ git init
