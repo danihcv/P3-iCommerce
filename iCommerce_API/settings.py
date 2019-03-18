@@ -25,7 +25,7 @@ SECRET_KEY = '5btw9sry2dp@ey(623b9wtc-_5j6-@0amqo7(bm^h^ja&g9gmq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['icommerce-api.herokuapp.com', 'localhost:8000', 'http://icommerce-cc.umbler.net/']
+ALLOWED_HOSTS = ['icommerce-api.herokuapp.com', 'localhost:8000', 'http://icommerce-cc.umbler.net/', 'api.danihcv.tk']
 
 
 # Application definition
